@@ -1,0 +1,51 @@
+//colors
+$temp-green: #ccffcc;
+$temp-blue:#99ccff;
+$bg-color: #fff;
+
+//metrics
+$bg-height: 200px;
+$container-width: 1000px;
+//$bg-insertion: -100px;
+
+$padding: 10px;
+
+//icons
+$margin: 5px;
+$icon-dimentions: 20px;
+$icon-size: 40px;
+
+$icon-color: blue;
+
+$button-depth: 5px;
+
+$img-height: 150px;
+$img-width: 150px;
+
+
+/*
+** small projects part
+*/
+
+
+$vert-line-color: #000;
+
+$vert-line-width: 1px;
+$vert-line-node: 20px;
+
+$vert-line-point: 10px;
+
+$right-color:blue;
+
+$left-color: green;
+
+$hover-font-size: 25px;
+
+$space-column: 100px;
+$content-height: 400px;
+
+$content-padding: 15px;
+
+$box-width: ($container-width)/2 * 0.9 - $content-padding*1.35;
+
+$hover-padding: $content-padding/2;

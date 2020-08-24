@@ -1,0 +1,270 @@
+/*
+** small projects part
+*/
+
+/*
+** small projects part
+*/
+
+@-webkit-keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+/*
+** intro part
+*/
+
+body {
+  height: 3000px;
+}
+
+/*
+#container-fluid
+{
+    background-color: $temp-blue;
+    width: 100%;
+    height: $bg-height;
+    position: absolute;
+    z-index: -100;
+}
+*/
+
+.container-bg {
+  background-color: #ccffcc;
+}
+
+.container {
+  width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+}
+
+.title-upper {
+  text-transform: uppercase;
+}
+
+.sticky-top {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 101;
+  top: 0;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.flex-sides {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+i[class^=ion-] {
+  font-size: 35px;
+  margin: 5px;
+  padding: 10px;
+  background-color: blue;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: center;
+  border-radius: 50%;
+  box-shadow: 0px 5px 10px blue;
+  position: relative;
+}
+
+i[class^=ion-]:hover {
+  transition: transform, box-shadow, scale;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in-out;
+  transform: rotateX(40deg);
+  box-shadow: 0px 5px 0px blue;
+  transform: scale(1.2);
+}
+
+i[class^=ion-]:active {
+  -webkit-animation: make-button-clicked 0s;
+          animation: make-button-clicked 0s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.img-container {
+  width: 150px;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0);
+  justify-content: center;
+  margin: 0;
+  /*
+  img
+  {
+      height: 100%;
+      overflow: hidden;
+  }
+  */
+  content: url(/images/Aibat_Zhakeyev.jpg?69733d2ac55c2b9585a15d154f9b4617);
+  background-attachment: fixed;
+  background-size: cover;
+  flex-grow: 1;
+  justify-self: center;
+}
+
+.grid-sides {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 50px);
+}
+
+.grid-sides .img-container {
+  grid-area: 1/1/span 1/span 1;
+}
+
+.grid-sides .grid-table {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
+
+table tr td {
+  text-align: center;
+  margin: 0;
+  padding: 3px;
+}
+
+/*
+** small projects part
+*/
+
+.margin {
+  margin-top: 30px;
+}
+
+.h3 {
+  font-weight: bold;
+}
+
+.vertical-line {
+  background-color: #000;
+  width: 10px;
+  height: 250px;
+  margin: auto;
+  opacity: 1;
+}
+
+.flex-wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.flex-wrapper::before {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  border-right: 1px solid #000;
+  height: 150%;
+  left: 499.5px;
+  top: -10px;
+}
+
+.content {
+  position: relative;
+  width: 429.75px;
+  min-width: 429.75px;
+  max-width: 429.75px;
+  height: 400px;
+  padding: 15px;
+  margin-bottom: 100px;
+}
+
+.content:last-of-type {
+  margin-bottom: 0;
+}
+
+.content:nth-child(2n+1) {
+  background-color: green;
+}
+
+.content:nth-child(2n) {
+  background-color: blue;
+  margin-top: 100px;
+}
+
+.content:nth-child(2n+1)::after {
+  left: 490px;
+}
+
+.content:nth-child(2n)::after {
+  left: -50px;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  border: 20px solid transparent;
+  height: 50px;
+  width: 0;
+  height: 0;
+}
+
+.content:nth-child(2n+1)::before {
+  border-left-color: green;
+  left: 459px;
+}
+
+.content:nth-child(2n)::before {
+  border-right-color: blue;
+  right: 460px;
+}
+
+.content::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 385px;
+  background-color: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.flex-wrapper:hover .content {
+  opacity: 0.5;
+}
+
+.flex-wrapper:hover .content:hover {
+  width: 1000px;
+  font-size: 25px;
+  opacity: 1;
+}
+
+.flex-wrapper:hover .content:hover::after,
+.flex-wrapper:hover .content:hover::before {
+  display: none;
+}
+
