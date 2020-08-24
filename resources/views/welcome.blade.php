@@ -59,30 +59,34 @@
 
     <div class="flex-wrapper">
 
+        <div class="content-wrapper">
             <div class="content">
                 Left content <br/>
                 Left content <br/>
                 Left content <br/>
             </div>
-
+        </div>
+        <div class="content-wrapper">
             <div class="content">
                 Right content <br/>
                 Right content <br/>
                 Right content <br/>
             </div>
-
+        </div>
+        <div class="content-wrapper">
             <div class="content">
                 Left content <br/>
                 Left content <br/>
                 Left content <br/>
             </div>
-
+        </div>
+        <div class="content-wrapper">
             <div class="content">
                 Right content <br/>
                 Right content <br/>
                 Right content <br/>
             </div>
-
+        </div>
     </div>
 
 </div>

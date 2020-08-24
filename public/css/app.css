@@ -32,17 +32,6 @@ body {
   height: 3000px;
 }
 
-/*
-#container-fluid
-{
-    background-color: $temp-blue;
-    width: 100%;
-    height: $bg-height;
-    position: absolute;
-    z-index: -100;
-}
-*/
-
 .container-bg {
   background-color: #ccffcc;
 }
@@ -177,7 +166,7 @@ table tr td {
   width: 100%;
   position: relative;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
 }
@@ -199,28 +188,7 @@ table tr td {
   max-width: 429.75px;
   height: 400px;
   padding: 15px;
-  margin-bottom: 100px;
-}
-
-.content:last-of-type {
-  margin-bottom: 0;
-}
-
-.content:nth-child(2n+1) {
-  background-color: green;
-}
-
-.content:nth-child(2n) {
-  background-color: blue;
-  margin-top: 100px;
-}
-
-.content:nth-child(2n+1)::after {
-  left: 490px;
-}
-
-.content:nth-child(2n)::after {
-  left: -50px;
+  margin-bottom: 10px;
 }
 
 .content::before {
@@ -230,16 +198,6 @@ table tr td {
   height: 50px;
   width: 0;
   height: 0;
-}
-
-.content:nth-child(2n+1)::before {
-  border-left-color: green;
-  left: 459px;
-}
-
-.content:nth-child(2n)::before {
-  border-right-color: blue;
-  right: 460px;
 }
 
 .content::after {
@@ -253,18 +211,61 @@ table tr td {
   border-radius: 50%;
 }
 
-.flex-wrapper:hover .content {
-  opacity: 0.5;
+.content-wrapper {
+  width: 100%;
 }
 
-.flex-wrapper:hover .content:hover {
-  width: 1000px;
+.content-wrapper:last-of-type {
+  margin-bottom: 0;
+}
+
+.content-wrapper:nth-child(2n+1) .content {
+  margin-left: 0px;
+  margin-right: auto;
+  background-color: green;
+}
+
+.content-wrapper:nth-child(2n+1) .content::after {
+  left: 490px;
+}
+
+.content-wrapper:nth-child(2n+1) .content::before {
+  border-left-color: green;
+  left: 459px;
+}
+
+.content-wrapper:nth-child(2n) .content {
+  margin-left: auto;
+  margin-right: 0px;
+  background-color: blue;
+}
+
+.content-wrapper:nth-child(2n) .content::after {
+  left: -50px;
+}
+
+.content-wrapper:nth-child(2n) .content::before {
+  border-right-color: blue;
+  right: 460px;
+}
+
+.flex-wrapper:hover .content-wrapper .content {
+  transition: all 2s ease-in;
+  opacity: 0.25;
+}
+
+.flex-wrapper:hover .content-wrapper:hover .content {
+  transition: all 1s ease-in-out;
+  max-width: 1000px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
   font-size: 25px;
   opacity: 1;
 }
 
-.flex-wrapper:hover .content:hover::after,
-.flex-wrapper:hover .content:hover::before {
+.flex-wrapper:hover .content-wrapper:hover .content::after,
+.flex-wrapper:hover .content-wrapper:hover .content::before {
   display: none;
 }
 

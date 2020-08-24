@@ -10,155 +10,7 @@ body
     height: 3000px;
 }
 
-/*
-#container-fluid
-{
-    background-color: $temp-blue;
-    width: 100%;
-    height: $bg-height;
-    position: absolute;
-    z-index: -100;
-}
-*/
-
-.container-bg
-{
-
-    background-color: $temp-green;
-}
-
-.container
-{
-    width: $container-width;
-    @include center-horizontal;
-    padding: $padding;
-}
-
-.title-upper
-{
-    text-transform: uppercase;
-}
-
-.sticky-top
-{
-    position: sticky;
-    z-index: 101;
-    top: 0;
-    margin-top: 0px;
-    padding-top: 0px;
-}
-
-.flex-sides
-{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.flex-group
-{
-    display: flex;
-    justify-content: space-around;
-}
-
-i[class ^= "ion-"]
-{
-    font:
-    {
-        size: 35px;
-    }
-    margin: $margin;
-    padding: $padding;
-    background:
-    {
-        color: $icon-color;
-    }
-    margin:
-    {
-        left: $margin;
-        right: $margin;
-    }
-
-    width: $icon-size;
-    height: $icon-size;
-
-    text-align: center;
-    vertical-align: center;
-
-    @include make-circle;
-
-
-    position: relative;
-    &:hover
-    {
-        @include make-button;
-    }
-
-    &:active
-    {
-        animation: make-button-clicked 0s;
-        animation-fill-mode: forwards;
-    }
-}
-
-.img-container
-{
-    
-    width: $img-width;
-    height: $img-height;
-    
-    background:
-    {
-        color: rgba(0,0,0,0);
-    }
-
-    justify-content: center;
-
-    margin: 0;
-
-    /*
-    img
-    {
-        height: 100%;
-        overflow: hidden;
-    }
-    */
-    content:url("../../public/images/Aibat_Zhakeyev.jpg");
-    background-attachment: fixed;
-    background-size: cover;
-    
-    flex-grow: 1;
-    justify-self: center;
-}
-
-.grid-sides
-{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 50px);
-
-    .img-container
-    {
-        grid-area: 1/1/span 1/span 1;
-    }
-
-    .grid-table
-    {
-        //put in cells
-        grid-column-start: 2;
-        grid-column-end: span 2;
-        grid-row-start: 1;
-        grid-row-end: span 1;
-    }
-}
-
-table tr td
-{
-    text-align: center;
-    margin: 0;
-    padding: 3px;
-}
-
+@import "parts/avatar";
 
 /*
 ** small projects part
@@ -193,7 +45,7 @@ table tr td
     width: 100%;
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -220,31 +72,6 @@ table tr td
     padding: $content-padding;
 
     margin-bottom: $space-column;
-    &:last-of-type
-    {
-        margin-bottom: 0;
-    }
-
-    &:nth-child(2n+1)
-    {
-        background-color: $left-color;
-    }
-    
-    &:nth-child(2n)
-    {
-        background-color: $right-color;
-        margin-top: $space-column;
-    }
-
-    &:nth-child(2n+1)::after
-    {
-        left: ($container-width)/2 - $padding;
-    }
-
-    &:nth-child(2n)::after
-    {
-        left: -($padding + $container-width/2*0.1 - 10);
-    }
 
     &::before
     {
@@ -254,18 +81,6 @@ table tr td
         height: 50px;
         width: 0;
         height: 0;
-    }
-
-    &:nth-child(2n+1)::before
-    {
-        border-left-color: $left-color;
-        left: ($container-width)/2*.9 + 10 - $vert-line-width;
-    }
-
-    &:nth-child(2n)::before
-    {
-        border-right-color: $right-color;
-        right: ($container-width)/2*.9 + 10;
     }
 
     &::after
@@ -285,12 +100,64 @@ table tr td
 
 }
 
-.flex-wrapper:hover .content
-{
-    opacity: 0.5;
-    &:hover
+.content-wrapper {
+    width: 100%;
+
+    &:last-of-type
     {
-        width: $container-width;
+        margin-bottom: 0;
+    }
+
+    &:nth-child(2n+1) .content
+    {
+        margin-left: 0px;
+        margin-right: auto;
+        background-color: $left-color;
+        &::after
+        {
+            left: ($container-width)/2 - $padding;
+        }
+
+        &::before
+        {
+            border-left-color: $left-color;
+            left: ($container-width)/2*.9 + 10 - $vert-line-width;
+        }
+    }
+    
+    &:nth-child(2n) .content
+    {
+        margin-left: auto;
+        margin-right: 0px;
+        background-color: $right-color;
+        &::after
+        {
+            left: -($padding + $container-width/2*0.1 - 10);
+        }
+
+        &::before
+        {
+            border-right-color: $right-color;
+            right: ($container-width)/2*.9 + 10;
+        }
+    }
+}
+
+.flex-wrapper:hover .content-wrapper
+{   
+    & .content
+    {
+        transition: all 2s ease-in;
+        opacity: 0.25;
+    }
+
+    &:hover .content
+    {
+        transition: all 1s ease-in-out;
+        max-width: $container-width;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
         font:
         {
             size: $hover-font-size;

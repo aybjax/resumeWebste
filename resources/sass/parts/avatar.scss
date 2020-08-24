@@ -1,0 +1,138 @@
+
+.container-bg
+{
+
+    background-color: $temp-green;
+}
+
+.container
+{
+    width: $container-width;
+    @include center-horizontal;
+    padding: $padding;
+}
+
+.title-upper
+{
+    text-transform: uppercase;
+}
+
+.sticky-top
+{
+    position: sticky;
+    z-index: 101;
+    top: 0;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+.flex-sides
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-group
+{
+    display: flex;
+    justify-content: space-around;
+}
+
+i[class ^= "ion-"]
+{
+    font:
+    {
+        size: 35px;
+    }
+    margin: $margin;
+    padding: $padding;
+    background:
+    {
+        color: $icon-color;
+    }
+    margin:
+    {
+        left: $margin;
+        right: $margin;
+    }
+
+    width: $icon-size;
+    height: $icon-size;
+
+    text-align: center;
+    vertical-align: center;
+
+    @include make-circle;
+
+
+    position: relative;
+    &:hover
+    {
+        @include make-button;
+    }
+
+    &:active
+    {
+        animation: make-button-clicked 0s;
+        animation-fill-mode: forwards;
+    }
+}
+
+.img-container
+{
+    
+    width: $img-width;
+    height: $img-height;
+    
+    background:
+    {
+        color: rgba(0,0,0,0);
+    }
+
+    justify-content: center;
+
+    margin: 0;
+
+    /*
+    img
+    {
+        height: 100%;
+        overflow: hidden;
+    }
+    */
+    content:url("../../../public/images/Aibat_Zhakeyev.jpg");
+    background-attachment: fixed;
+    background-size: cover;
+    
+    flex-grow: 1;
+    justify-self: center;
+}
+
+.grid-sides
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 50px);
+
+    .img-container
+    {
+        grid-area: 1/1/span 1/span 1;
+    }
+
+    .grid-table
+    {
+        //put in cells
+        grid-column-start: 2;
+        grid-column-end: span 2;
+        grid-row-start: 1;
+        grid-row-end: span 1;
+    }
+}
+
+table tr td
+{
+    text-align: center;
+    margin: 0;
+    padding: 3px;
+}
