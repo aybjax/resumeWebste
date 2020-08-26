@@ -1,0 +1,398 @@
+/*
+** small projects part
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebook
+*/
+
+@-webkit-keyframes change-background {
+  0% {
+    background-color: #000;
+  }
+
+  25% {
+    background-color: #696969;
+  }
+
+  50% {
+    background-color: #2F4F4F;
+  }
+
+  75% {
+    background-color: #000080;
+  }
+
+  100% {
+    background-color: #000;
+  }
+}
+
+@keyframes change-background {
+  0% {
+    background-color: #000;
+  }
+
+  25% {
+    background-color: #696969;
+  }
+
+  50% {
+    background-color: #2F4F4F;
+  }
+
+  75% {
+    background-color: #000080;
+  }
+
+  100% {
+    background-color: #000;
+  }
+}
+
+@-webkit-keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+@-webkit-keyframes progress-animate {
+  0% {
+    background-image: linear-gradient(to left, #750909, #d87824, #b7ae47, #4bdd49, #52c9ad);
+  }
+
+  25% {
+    background-image: linear-gradient(to left, #d87824, #b7ae47, #4bdd49, #52c9ad, #750909);
+  }
+
+  50% {
+    background-image: linear-gradient(to left, #b7ae47, #4bdd49, #52c9ad, #750909, #d87824);
+  }
+
+  75% {
+    background-image: linear-gradient(to left, #4bdd49, #52c9ad, #750909, #d87824, #b7ae47);
+  }
+
+  100% {
+    background-image: linear-gradient(to left, #52c9ad, #750909, #d87824, #b7ae47, #4bdd49);
+  }
+}
+
+@keyframes progress-animate {
+  0% {
+    background-image: linear-gradient(to left, #750909, #d87824, #b7ae47, #4bdd49, #52c9ad);
+  }
+
+  25% {
+    background-image: linear-gradient(to left, #d87824, #b7ae47, #4bdd49, #52c9ad, #750909);
+  }
+
+  50% {
+    background-image: linear-gradient(to left, #b7ae47, #4bdd49, #52c9ad, #750909, #d87824);
+  }
+
+  75% {
+    background-image: linear-gradient(to left, #4bdd49, #52c9ad, #750909, #d87824, #b7ae47);
+  }
+
+  100% {
+    background-image: linear-gradient(to left, #52c9ad, #750909, #d87824, #b7ae47, #4bdd49);
+  }
+}
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebooks
+*/
+
+/*
+** small projects part
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebook
+*/
+
+body {
+  min-height: 100%;
+  background: #FAEBD7 url(/images/notebook.jpg?a72264f4eeb1b74f17c77a18b73f0c97) center center;
+  background-size: cover;
+}
+
+.my-jumbotron {
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  margin-top: 150px;
+}
+
+.my-jumbotron p {
+  font-size: large;
+  letter-spacing: 1.5px;
+  line-height: 2;
+}
+
+.my-jumbotron h1 {
+  letter-spacing: 2px;
+}
+
+.my-jumbotron h3 {
+  letter-spacing: 3px;
+}
+
+.sign-in-button {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  background-color: rgba(0, 255, 64, 0.1);
+  padding: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #00ff40;
+}
+
+.sign-in-button:hover {
+  background-color: #00ff40;
+  box-shadow: 1px 3px 0 black;
+  color: white;
+}
+
+.sign-in-button:active {
+  background-color: #00ff40;
+  position: relative;
+  top: 3px;
+  box-shadow: none;
+  color: white;
+}
+
+/*****************    Signed in    **********************/
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 150px;
+  width: 1000px;
+}
+
+.container .flex-row a {
+  text-decoration: none;
+  color: black;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+textarea {
+  resize: none;
+  padding: 10px;
+  font-size: 20px;
+  width: 100%;
+  border-radius: 5px;
+  border-left: 10px solid #8B0000;
+  color: #8B0000;
+}
+
+textarea::first-letter {
+  font-weight: bold;
+}
+
+.flex-col {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  max-height: 500px;
+}
+
+.flex-row {
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.flex-row a.note-btn {
+  background-color: rgba(210, 105, 30, 0.5);
+  text-shadow: 0 0 1px white;
+}
+
+.flex-row a.note-btn input {
+  background: none;
+  color: inherit;
+  text-shadow: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.flex-row a.done-btn {
+  background-color: #35d811;
+}
+
+.flex-row a.note-btn,
+.flex-row a.done-btn {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.flex-row a.note-btn:hover,
+.flex-row a.done-btn:hover {
+  background-color: chocolate;
+  box-shadow: 1px 3px 0 black;
+  color: white;
+}
+
+.flex-row a.note-btn:active,
+.flex-row a.done-btn:active {
+  background-color: maroon;
+  box-shadow: none;
+  color: white;
+  position: relative;
+  top: 3px;
+}
+
+.padding-right {
+  padding-right: 15px;
+}
+
+.overflow {
+  overflow-y: scroll;
+}
+
+.text-list {
+  margin: 0;
+  width: 100%;
+  max-height: 500px;
+  padding-left: 15px;
+}
+
+.text-list a {
+  text-decoration: none;
+  color: black;
+  padding: 0px;
+  margin: 0px;
+}
+
+.text-list .text-item {
+  text-align: left;
+  margin: 1px 0 7px 0;
+  padding: 5px 10px;
+  background-color: #FAEBD7;
+  border-radius: 10px;
+}
+
+.text-list .text-item .text-text {
+  max-width: 1000px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 20px;
+}
+
+.text-list .text-item .text-time {
+  font-size: small;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 250px);
+  width: 100%;
+}
+
+.grid .button-side {
+  grid-area: 1/1/1/1;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.grid .button-side input {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(165, 42, 42, 0.9);
+  border-radius: 10px;
+  font-size: 20px;
+  color: #FFEBCD;
+}
+
+.grid .button-side input:hover {
+  background-color: brown;
+}
+
+.grid .button-side input:active {
+  color: white;
+}
+
+.grid .text-item {
+  grid-area: 1/2/1/5;
+}
+
+.no-notes {
+  margin: 1px 0 7px 0;
+  padding: 5px 10px;
+  background-color: #FAEBD7;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 25px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+}
+

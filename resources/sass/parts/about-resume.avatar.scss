@@ -5,6 +5,12 @@
     background-color: $temp-green;
 }
 
+.container-tmp
+{
+
+    background-color: $tmp-color;
+}
+
 .container
 {
     width: $container-width;
@@ -113,7 +119,7 @@ i[class ^= "ion-"]
 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 50px);
+    grid-template-rows: repeat($grid-row-repeats, grid-row-height);
 
     .img-container
     {
@@ -135,4 +141,22 @@ table tr td
     text-align: center;
     margin: 0;
     padding: 3px;
+}
+
+
+.empty-bar {
+    height: 4px;
+    width: 100%;
+    background-color: $progress-bg;
+}
+
+.progress {
+    height: 100%;
+    margin-left: 0px;
+    width: 70%;
+    animation-name: progress-animate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: linear;
 }

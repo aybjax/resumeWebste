@@ -1,7 +1,18 @@
 //colors
 $temp-green: #ccffcc;
-$temp-blue:#99ccff;
+$tmp-color: #ffccfb;
+$temp-blue:#99b4ff;
 $bg-color: #fff;
+
+$progress-bg: #918299;
+$progress: #35d811;
+
+//progress bar colors
+$p1: rgba(117, 9, 9, 1);
+$p2: rgba(216, 120, 36, 1);
+$p3: rgba(183, 174, 71, 1);
+$p4: rgba(75, 221, 73, 1);
+$p5: rgba(82, 201, 173, 1);
 
 //metrics
 $bg-height: 200px;
@@ -22,6 +33,9 @@ $button-depth: 5px;
 $img-height: 150px;
 $img-width: 150px;
 
+
+$grid-row-repeats: 3;
+$grid-row-height: 50px;
 
 /*
 ** small projects part
@@ -49,3 +63,44 @@ $content-padding: 15px;
 $box-width: ($container-width)/2 * 0.9 - $content-padding*1.35;
 
 $hover-padding: $content-padding/2;
+
+$content-enlarged-height: $content-height*1.2;
+
+
+
+/************************************************************/
+/*
+**  navbar
+*/
+
+$navbar-width: 2px;
+$navbar-color: rgba(148, 96, 226, 0.7);
+$navbar-color-hover: rgb(148, 96, 226);
+$navbar-text-color: rgba(255, 255, 255, 0.7);
+$navbar-text-color-hover: rgba(255, 255, 255, 1);
+$navbar-padding: 10px;
+
+
+
+/************************************************************/
+/*
+**  navbar
+*/
+
+$btn-color: rgb(210, 105, 30);
+$btn-color-faint: rgba(210, 105, 30, 0.5);
+$btn-color-active: rgb(128, 0, 0);
+
+
+
+/************************************************************/
+/*
+**  notebook
+*/
+
+$margin: 10px;
+$delete-button-color: rgba(	165,42,42, 0.9);
+$delete-button-text-color: #FFEBCD;
+$delete-press-color: rgba(	165,42,42, 1);
+$delete-press-text-color: white;
+$textarea: #8B0000;

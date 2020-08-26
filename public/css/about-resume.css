@@ -1,0 +1,447 @@
+/*
+** small projects part
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebook
+*/
+
+/*
+** small projects part
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebook
+*/
+
+@-webkit-keyframes change-background {
+  0% {
+    background-color: #000;
+  }
+
+  25% {
+    background-color: #696969;
+  }
+
+  50% {
+    background-color: #2F4F4F;
+  }
+
+  75% {
+    background-color: #000080;
+  }
+
+  100% {
+    background-color: #000;
+  }
+}
+
+@keyframes change-background {
+  0% {
+    background-color: #000;
+  }
+
+  25% {
+    background-color: #696969;
+  }
+
+  50% {
+    background-color: #2F4F4F;
+  }
+
+  75% {
+    background-color: #000080;
+  }
+
+  100% {
+    background-color: #000;
+  }
+}
+
+@-webkit-keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+@-webkit-keyframes progress-animate {
+  0% {
+    background-image: linear-gradient(to left, #750909, #d87824, #b7ae47, #4bdd49, #52c9ad);
+  }
+
+  25% {
+    background-image: linear-gradient(to left, #d87824, #b7ae47, #4bdd49, #52c9ad, #750909);
+  }
+
+  50% {
+    background-image: linear-gradient(to left, #b7ae47, #4bdd49, #52c9ad, #750909, #d87824);
+  }
+
+  75% {
+    background-image: linear-gradient(to left, #4bdd49, #52c9ad, #750909, #d87824, #b7ae47);
+  }
+
+  100% {
+    background-image: linear-gradient(to left, #52c9ad, #750909, #d87824, #b7ae47, #4bdd49);
+  }
+}
+
+@keyframes progress-animate {
+  0% {
+    background-image: linear-gradient(to left, #750909, #d87824, #b7ae47, #4bdd49, #52c9ad);
+  }
+
+  25% {
+    background-image: linear-gradient(to left, #d87824, #b7ae47, #4bdd49, #52c9ad, #750909);
+  }
+
+  50% {
+    background-image: linear-gradient(to left, #b7ae47, #4bdd49, #52c9ad, #750909, #d87824);
+  }
+
+  75% {
+    background-image: linear-gradient(to left, #4bdd49, #52c9ad, #750909, #d87824, #b7ae47);
+  }
+
+  100% {
+    background-image: linear-gradient(to left, #52c9ad, #750909, #d87824, #b7ae47, #4bdd49);
+  }
+}
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebooks
+*/
+
+body {
+  -webkit-animation: change-background;
+          animation: change-background;
+  -webkit-animation-duration: 10s;
+          animation-duration: 10s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-fill-mode: backwards;
+          animation-fill-mode: backwards;
+}
+
+/*
+** intro part
+*/
+
+.container-bg {
+  background-color: #ccffcc;
+}
+
+.container-tmp {
+  background-color: #ffccfb;
+}
+
+.container {
+  width: 1000px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 10px;
+}
+
+.title-upper {
+  text-transform: uppercase;
+}
+
+.sticky-top {
+  position: -webkit-sticky;
+  position: sticky;
+  z-index: 101;
+  top: 0;
+  margin-top: 0px;
+  padding-top: 0px;
+}
+
+.flex-sides {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+i[class^=ion-] {
+  font-size: 35px;
+  margin: 10px;
+  padding: 10px;
+  background-color: blue;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  vertical-align: center;
+  border-radius: 50%;
+  box-shadow: 0px 5px 15px blue;
+  position: relative;
+}
+
+i[class^=ion-]:hover {
+  transition: transform, box-shadow, scale;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in-out;
+  transform: rotateX(40deg);
+  box-shadow: 0px 5px 0px blue;
+  transform: scale(1.2);
+}
+
+i[class^=ion-]:active {
+  -webkit-animation: make-button-clicked 0s;
+          animation: make-button-clicked 0s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+}
+
+.img-container {
+  width: 150px;
+  height: 150px;
+  background-color: rgba(0, 0, 0, 0);
+  justify-content: center;
+  margin: 0;
+  /*
+  img
+  {
+      height: 100%;
+      overflow: hidden;
+  }
+  */
+  content: url(/images/Aibat_Zhakeyev.jpg?69733d2ac55c2b9585a15d154f9b4617);
+  background-attachment: fixed;
+  background-size: cover;
+  flex-grow: 1;
+  justify-self: center;
+}
+
+.grid-sides {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, grid-row-height);
+}
+
+.grid-sides .img-container {
+  grid-area: 1/1/span 1/span 1;
+}
+
+.grid-sides .grid-table {
+  grid-column-start: 2;
+  grid-column-end: span 2;
+  grid-row-start: 1;
+  grid-row-end: span 1;
+}
+
+table tr td {
+  text-align: center;
+  margin: 0;
+  padding: 3px;
+}
+
+.empty-bar {
+  height: 4px;
+  width: 100%;
+  background-color: #918299;
+}
+
+.progress {
+  height: 100%;
+  margin-left: 0px;
+  width: 70%;
+  -webkit-animation-name: progress-animate;
+          animation-name: progress-animate;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-timing-function: linear;
+          animation-timing-function: linear;
+}
+
+/*
+** small projects part
+*/
+
+.margin {
+  margin-top: 30px;
+}
+
+.h3 {
+  font-weight: bold;
+}
+
+.flex-wrapper {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.flex-wrapper::before {
+  position: absolute;
+  content: "";
+  display: inline-block;
+  border-right: 1px solid #000;
+  height: 100%;
+  left: 499.5px;
+  top: -10px;
+}
+
+.content {
+  position: relative;
+  width: 429.75px;
+  min-width: 429.75px;
+  max-width: 429.75px;
+  height: 400px;
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.content::before {
+  content: "";
+  position: absolute;
+  border: 20px solid transparent;
+  height: 50px;
+  width: 0;
+  height: 0;
+}
+
+.content::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 385px;
+  background-color: #000;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.content-wrapper {
+  width: 100%;
+}
+
+.content-wrapper:last-of-type {
+  margin-bottom: 0;
+}
+
+.content-wrapper:nth-child(2n+1) .content {
+  margin-left: 0px;
+  margin-right: auto;
+  background-color: green;
+}
+
+.content-wrapper:nth-child(2n+1) .content::after {
+  left: 490px;
+}
+
+.content-wrapper:nth-child(2n+1) .content::before {
+  border-left-color: green;
+  left: 459px;
+}
+
+.content-wrapper:nth-child(2n) .content {
+  margin-left: auto;
+  margin-right: 0px;
+  background-color: blue;
+}
+
+.content-wrapper:nth-child(2n) .content::after {
+  left: -50px;
+}
+
+.content-wrapper:nth-child(2n) .content::before {
+  border-right-color: blue;
+  right: 460px;
+}
+
+.flex-wrapper:hover .content-wrapper .content {
+  transition: all 1s ease-in;
+  opacity: 0.5;
+}
+
+.flex-wrapper:hover .content-wrapper:hover .content {
+  transition: all 1s ease-in-out;
+  max-width: 900px;
+  width: 900px;
+  height: 480px;
+  margin-right: auto;
+  margin-left: auto;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 500px;
+  font-size: 25px;
+  opacity: 1;
+}
+
+.flex-wrapper:hover .content-wrapper:hover .content::after,
+.flex-wrapper:hover .content-wrapper:hover .content::before {
+  display: none;
+}
+
+.frame-window {
+  margin-right: auto;
+  margin-left: auto;
+  height: 500px;
+  width: 1000px;
+  position: fixed;
+  top: 300px;
+  z-index: 1000;
+  display: none;
+}
+

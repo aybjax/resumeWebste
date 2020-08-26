@@ -1,12 +1,18 @@
 @extends("layouts.base")
-@section("content")
+
+@section("base.style-address")
+    <link rel="stylesheet" href="{{asset('css/about-resume.css')}}">
+@endsection("base.style-address")
+
+@section("base.content")
 <!-- 
 <div id="container-fluid">
 
 </div>
 -->
 
-<div class="container container-bg">
+
+<div class="container container-tmp">
 
     <!-- top text on -->
     <div class="flex-sides">
@@ -32,20 +38,52 @@
                 <td colspan="2" class="h3">Programming Skills</td>
             </tr>
             <tr>
-                <td>Python3</td>
-                <td>Shell/Bash</td>
+                <td>Python3
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
+                <td>Shell/Bash
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td>Golang</td>
-                <td>PHP and laravel</td>
+                <td>Golang
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
+                <td>PHP and laravel
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td>C</td>
-                <td>Java</td>
+                <td>C
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
+                <td>Java
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
             </tr>
             <tr>
-                <td>JS, JQuery, Reactjs</td>
-                <td>HTML, CSS, BS</td>
+                <td>JS, JQuery, Reactjs
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
+                <td>HTML, CSS, BS
+                    <div class="empty-bar">
+                        <div class="progress" id="70"></div>
+                    </div>
+                </td>
             </tr>
         </table>
     </div>
@@ -90,4 +128,11 @@
     </div>
 
 </div>
-@endsection("content")
+
+
+<div class="container">
+    <iframe src="https://www.w3schools.com" title="W3Schools Free Online Web Tutorials" class="frame-window"></iframe> 
+</div>
+
+
+@endsection("base.content")

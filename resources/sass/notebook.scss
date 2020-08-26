@@ -1,0 +1,245 @@
+@use "resources/mixins";
+@use "resources/variables";
+
+body {
+    min-height: 100%;
+    background: #FAEBD7 url('../../public/media/notebook.jpg') center center;
+    background-size: cover;
+}
+
+.my-jumbotron {
+    @include mixins.center-horizontal;
+    text-align: center;
+    
+    margin-top: 150px;
+    
+    p {
+        font: {
+            size: large;
+        }
+        letter-spacing: 1.5px;
+        line-height: 2;
+    }
+    h1 {
+        letter-spacing: 2px;
+    }
+
+    h3 {
+        letter-spacing: 3px;
+    }
+}
+
+.sign-in-button {
+    text-decoration: none;
+    color: black;
+    display: inline-block;
+    background-color: rgba(0, 255, 64, 0.1);
+    padding: variables.$padding;
+    border-radius: variables.$padding;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgba(0, 255, 64, 1);
+
+    &:hover {
+        background-color: rgba(0, 255, 64, 1);
+        box-shadow: 1px 3px 0 black;
+        color: white;
+    }
+
+    &:active {
+        background-color: rgba(0, 255, 64, 1);
+        position: relative;
+        top: 3px;
+        box-shadow: none;
+        color: white;
+    }
+}
+
+
+
+/*****************    Signed in    **********************/
+
+.container {
+    @include mixins.center-horizontal;
+    margin-top: 150px;
+    width: variables.$container-width;
+    .flex-row {
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+textarea {
+    resize: none;
+    padding: variables.$padding;
+    font: {
+        size: 20px;
+    }
+
+    &::first-letter {
+        font: {
+            weight: bold;
+        }
+    }
+    width: 100%;
+    border-radius: 5px;
+    border-left: 10px solid variables.$textarea;
+    color: variables.$textarea;
+}
+
+.flex-col {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    max-height: 500px;
+}
+
+.flex-row {
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: stretch;
+
+    a.note-btn {
+        background-color: variables.$btn-color-faint;
+        text-shadow: 0 0 1px white;
+        input {
+            background: none;
+            color: inherit;
+            text-shadow: inherit;
+	        border: none;
+	        padding: 0;
+	        font: inherit;
+	        cursor: pointer;
+	        outline: inherit;
+        }
+    }
+
+    a.done-btn {
+        background-color: variables.$progress;
+    }
+
+    a.note-btn, a.done-btn {
+        padding: variables.$padding;
+        border-radius: 4px;
+        margin-bottom: variables.$margin;
+    
+        &:hover {
+            background-color: variables.$btn-color;
+            box-shadow: 1px 3px 0 black;
+            color: white;
+        }
+    
+        &:active {
+            background-color: variables.$btn-color-active;
+            box-shadow: none;
+            color: white;
+            position: relative;
+            top: 3px;
+        }
+    }
+}
+
+.padding-right {
+    padding-right: 15px;
+}
+
+.overflow {
+    overflow-y: scroll;
+}
+
+.text-list {
+    margin: 0;
+    width: 100%;
+    max-height: 500px;
+
+    padding-left: 15px;
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .text-item {
+        text-align: left;
+        @include mixins.notes-content;
+    
+        .text-text {
+            max-width: variables.$container-width;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font: {
+                size: 20px;
+            }
+        }
+
+        .text-time {
+            font: {
+                size: small;
+            }
+        }
+    }
+}
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, variables.$container-width/4);
+    width: 100%;
+    .button-side {
+        grid-area: 1/1/1/1;
+        margin-right: variables.$margin;
+        margin-bottom: variables.$margin;
+        input {
+            width: 100%;
+            height: 100%;
+            background-color: variables.$delete-button-color;
+            border-radius: 10px;
+            font: {
+                size: 20px;
+            }
+            color: variables.$delete-button-text-color;
+
+            &:hover {
+                background-color: variables.$delete-press-color;
+            }
+
+            &:active {
+                color: variables.$delete-press-text-color;
+            }
+        }
+    }
+
+    .text-item {
+        grid-area: 1/2/1/5;
+    }
+}
+
+.no-notes {
+    @include mixins.notes-content;
+    text-align: center;
+    font: {
+        size: 25px;
+    }
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: 0;
+}

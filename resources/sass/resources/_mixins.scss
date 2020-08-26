@@ -1,4 +1,23 @@
 @import "variables";
+@import "../variables";
+
+@keyframes change-background {
+    0% {
+        background-color: #000;
+    }
+    25% {
+        background-color: #696969;
+    }
+    50% {
+        background-color: #2F4F4F;
+    }
+    75% {
+        background-color: #000080;
+    }
+    100% {
+        background-color: #000;
+    }
+}
 
 @mixin center-horizontal {
     margin-right: auto;
@@ -36,4 +55,48 @@
             display: none;
         }
     }
+}
+
+@function number-percent($num, $pc:0.9)
+{
+    @return $num * $pc;
+}
+
+@function half-percent($num, $pc:0.9)
+{
+    @return $num/2 * $pc;
+}
+
+
+@keyframes progress-animate {
+    0% {background-image: linear-gradient(to left, $p1, $p2, $p3, $p4, $p5);}
+    25% {background-image: linear-gradient(to left, $p2, $p3, $p4, $p5,  $p1);}
+    50% {background-image: linear-gradient(to left, $p3, $p4, $p5,  $p1, $p2);}
+    75% {background-image: linear-gradient(to left, $p4, $p5,  $p1, $p2, $p3);}
+    100% {background-image: linear-gradient(to left, $p5,  $p1, $p2, $p3, $p4);}
+}
+
+
+
+/************************************************************/
+/*
+**  navbar
+*/
+
+@mixin navbar-border($width:2px, $style:solid, $color: $purple) {
+   width: 2px; style: solid; color: $color;
+}
+
+/************************************************************/
+/*
+**  notebooks
+*/
+
+
+
+@mixin notes-content {
+    margin: 1px 0 7px 0;
+    padding: 5px 10px;
+    background-color: #FAEBD7;
+    border-radius: 10px;
 }

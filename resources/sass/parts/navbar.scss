@@ -1,0 +1,80 @@
+@import "../resources/mixins";
+
+ul.navbar-list {
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    padding:0;
+    
+    &:hover li:not(.right-float-navbar) a.active-navbar {
+        background-color: $navbar-color;
+        color: $navbar-text-color;
+        box-shadow: none;
+        text-shadow: none;
+    }
+
+    li:not(.right-float-navbar) a{
+        display: block;
+        text-decoration: none;
+        border: {
+            left: {
+                @include navbar-border($navbar-width, solid, $navbar-color);
+            }
+            top: {
+                @include navbar-border($navbar-width, solid, $navbar-color);
+            }
+            bottom: {
+                @include navbar-border($navbar-width, solid, $navbar-color);
+            }
+        }
+        
+
+        padding: $navbar-padding;
+
+        background-color: $navbar-color;
+        color: $navbar-text-color;
+
+
+
+        &:hover, &.active-navbar {
+            background-color: $navbar-color-hover;
+            color: $navbar-text-color-hover;
+            text-shadow: 1px 1px 5px black;
+            border-bottom-color: black;
+            box-shadow: 1px 1px 5px black;
+            top: 2px;
+            transition: all 0.25s ease;
+        }
+    }
+
+    .right-float-navbar {
+        margin: {
+            left: auto;
+            right: 10px;
+        }
+        a {
+            color: $btn-color;
+            text-shadow: 0 0 1px black;
+            font-size: larger;
+            background: none;
+            border: none;
+        }
+    }
+}
+
+ul.navbar-list li .left-edge {
+    border-top-left-radius: $navbar-width * 3;
+    border-bottom-left-radius: $navbar-width * 3;
+}
+
+ul.navbar-list li .right-edge {
+    border-top-right-radius: $navbar-width * 3;
+    border-bottom-right-radius: $navbar-width * 3;
+}
+
+.emphasis {
+    font: {
+        size: larger;
+        weight: bold;
+    }
+}

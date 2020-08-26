@@ -1,0 +1,179 @@
+@import "resources/variables";
+@import "resources/mixins";
+
+
+body {
+    animation: change-background;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: backwards;
+}
+
+
+/*
+** intro part
+*/
+
+@import "parts/about-resume.avatar";
+
+/*
+** small projects part
+*/
+.margin
+{
+    margin-top: 30px;
+}
+
+.h3
+{
+    font:
+    {
+        weight: bold;
+    }
+}
+
+.flex-wrapper
+{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.flex-wrapper::before
+{
+    position: absolute;
+    content: "";
+    display: inline-block;
+    border-right: $vert-line-width solid #000;
+    height: 100%;
+    left: $container-width/2-$vert-line-width/2;
+    top: -$vert-line-point;
+}
+
+.content
+{
+    position: relative;
+    width: $box-width;
+    min-width: $box-width;
+    max-width: $box-width;
+    height: $content-height;
+    padding: $content-padding;
+
+    margin-bottom: $space-column;
+
+    &::before
+    {
+        content: "";
+        position: absolute;
+        border: 20px solid transparent;
+        height: 50px;
+        width: 0;
+        height: 0;
+    }
+
+    &::after
+    {
+        content: "";
+        display: block;
+        position: absolute;
+
+        //top: $content-padding*1.5;
+        bottom: $content-height - $content-padding;
+
+        background-color: $vert-line-color;
+        width: $vert-line-node;
+        height: $vert-line-node;
+        border-radius: 50%;
+    }
+}
+
+.content-wrapper {
+    width: 100%;
+
+    &:last-of-type
+    {
+        margin-bottom: 0;
+    }
+
+    &:nth-child(2n+1) .content
+    {
+        margin-left: 0px;
+        margin-right: auto;
+        background-color: $left-color;
+        &::after
+        {
+            left: ($container-width)/2 - $padding;
+        }
+
+        &::before
+        {
+            border-left-color: $left-color;
+            left: ($container-width)/2*.9 + 10 - $vert-line-width;
+        }
+    }
+    
+    &:nth-child(2n) .content
+    {
+        margin-left: auto;
+        margin-right: 0px;
+        background-color: $right-color;
+        &::after
+        {
+            left: -(half-percent($container-width, 0.1));
+        }
+
+        &::before
+        {
+            border-right-color: $right-color;
+            right: half-percent($container-width) + $padding;
+        }
+    }
+}
+
+.flex-wrapper:hover .content-wrapper
+{
+    & .content
+    {
+        transition: all 1s ease-in;
+        opacity: 0.5;
+    }
+
+    &:hover .content
+    {
+        transition: all 1s ease-in-out;
+        max-width: number-percent($container-width);
+        width: number-percent($container-width);
+        height: $content-enlarged-height;
+        margin-right: auto;
+        margin-left: auto;
+
+        position: sticky;
+        top: 500px;
+
+        font:
+        {
+            size: $hover-font-size;
+        }
+        opacity: 1;
+
+        &::after, &::before
+        {
+            display: none;
+        }
+    }
+}
+
+
+.frame-window {
+    @include center-horizontal;
+    height: 500px;
+    width: 1000px;
+    position: fixed;
+    top: $grid-row-repeats * $grid-row-height * 2;
+    z-index: 1000;
+    display: none;
+}
