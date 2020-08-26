@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>{{ucfirst(strtok(Route::currentRouteName(), "."))}}</title>
 
         <style>
             .footer {
@@ -78,11 +78,12 @@
                 @endif
         </li>
     </ul>
-        @yield("base.content")
+        
+    @yield("base.content")
 
-        <div class="footer">
-            &copy; Develop with aybjax
-        </div>
+    <div class="footer">
+        &copy; Develop with aybjax
+    </div>
     </body>
     @yield("base.script-address")
 </html>

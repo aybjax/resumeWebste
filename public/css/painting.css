@@ -1,0 +1,176 @@
+/*
+** small projects part
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebook
+*/
+
+@-webkit-keyframes change-background {
+  0% {
+    background-color: #000;
+  }
+
+  25% {
+    background-color: #696969;
+  }
+
+  50% {
+    background-color: #2F4F4F;
+  }
+
+  75% {
+    background-color: #000080;
+  }
+
+  100% {
+    background-color: #000;
+  }
+}
+
+@keyframes change-background {
+  0% {
+    background-color: #000;
+  }
+
+  25% {
+    background-color: #696969;
+  }
+
+  50% {
+    background-color: #2F4F4F;
+  }
+
+  75% {
+    background-color: #000080;
+  }
+
+  100% {
+    background-color: #000;
+  }
+}
+
+@-webkit-keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes make-button-clicked {
+  to {
+    transform: rotateX(40deg);
+    box-shadow: 0px 0px 0px blue;
+    top: 5px;
+    transform: scale(1.2);
+  }
+}
+
+@-webkit-keyframes progress-animate {
+  0% {
+    background-image: linear-gradient(to left, #750909, #d87824, #b7ae47, #4bdd49, #52c9ad);
+  }
+
+  25% {
+    background-image: linear-gradient(to left, #d87824, #b7ae47, #4bdd49, #52c9ad, #750909);
+  }
+
+  50% {
+    background-image: linear-gradient(to left, #b7ae47, #4bdd49, #52c9ad, #750909, #d87824);
+  }
+
+  75% {
+    background-image: linear-gradient(to left, #4bdd49, #52c9ad, #750909, #d87824, #b7ae47);
+  }
+
+  100% {
+    background-image: linear-gradient(to left, #52c9ad, #750909, #d87824, #b7ae47, #4bdd49);
+  }
+}
+
+@keyframes progress-animate {
+  0% {
+    background-image: linear-gradient(to left, #750909, #d87824, #b7ae47, #4bdd49, #52c9ad);
+  }
+
+  25% {
+    background-image: linear-gradient(to left, #d87824, #b7ae47, #4bdd49, #52c9ad, #750909);
+  }
+
+  50% {
+    background-image: linear-gradient(to left, #b7ae47, #4bdd49, #52c9ad, #750909, #d87824);
+  }
+
+  75% {
+    background-image: linear-gradient(to left, #4bdd49, #52c9ad, #750909, #d87824, #b7ae47);
+  }
+
+  100% {
+    background-image: linear-gradient(to left, #52c9ad, #750909, #d87824, #b7ae47, #4bdd49);
+  }
+}
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebooks
+*/
+
+/*
+** small projects part
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  navbar
+*/
+
+/************************************************************/
+
+/*
+**  notebook
+*/
+
+body {
+  height: 100%;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  width: 1000px;
+  border: 2px solid black;
+  margin-top: 150px;
+  margin-bottom: 150px;
+  padding: 10px;
+}
+
