@@ -6,7 +6,7 @@ body {
     height: 100%;
 }
 
-.container {
+.canvas-container {
     @include mixins.center-horizontal;
     width: variables.$container-width;
     border: 2px solid black;
@@ -14,5 +14,120 @@ body {
         top: 150px;
         bottom: 150px;
     }
+    border-radius: 10px;
+    padding:{
+        left:15px;
+        right:15px;
+        top: 0;
+        bottom: 0;
+    }
+}
+
+.canvas {
+    width: 1000px;
+    height: 500px;
+    outline: {
+        style: solid;
+        width: 5px;
+        color: black;
+    }
+    margin:0;
+    padding:0;
+}
+
+.toolbar {
     padding: variables.$padding;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    button[type="button"].yes {
+        margin: {
+            left: variables.$padding;
+            top: variables.$padding;
+            bottom: variables.$padding;
+            right: auto;
+        }
+    }
+
+    button[type="button"].no {
+        margin: {
+            right: variables.$padding;
+            top: variables.$padding;
+            bottom: variables.$padding;
+            left: auto;
+        }
+    }
+
+    input {
+        margin: {
+            right:auto;
+            top: variables.$padding;
+            bottom: variables.$padding;
+            left: auto;
+        }
+
+        width: 100px;
+    }
+
+    button {
+        font: {
+            size: 20px;
+            weight: bold;
+        }
+        letter-spacing: 3px;
+        margin: {
+            top:variables.$padding;
+            bottom: variables.$padding;
+            left: auto;
+            right: auto;
+        }
+    }
+}
+
+
+.colorPicker {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+   
+}
+
+img {
+    outline: {
+        style: solid;
+        width: 2px;
+        color: green;
+    }
+    //position: absolute;
+}
+
+.galery {
+    position: relative;
+    margin: {
+        top: 150px;
+        left: auto;
+        right: auto;
+        bottom: 150px;
+    }
+    padding: 0;
+    
+    width: 1000px;
+    height: 700px;
+    outline: {
+        style: solid;
+        width: 5px;
+        color: black;
+    }
+
+    .img-center {
+        margin-top: 0;
+        //margin-bottom: 50px;
+    }
+
+    .img-under {
+        position: absolute;
+    }
 }

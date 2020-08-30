@@ -4,7 +4,7 @@
 @endsection("base.style-address")
 
 @section("base.content")
-<div class="container" id="painting"></div>
+<div id="painting"></div>
 @endsection("base.content")
 
 

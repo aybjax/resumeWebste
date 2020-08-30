@@ -41,6 +41,9 @@ Route::delete("notebooks/delete","NotebookController@delete")->name('notebooks.d
 
 
 //PAINTING REACTJS
-Route::get("painting", array('as'=>'painting', function(){
-    return view('painting');
-}));
+Route::get("painting", 'PaintsController@index')->name("painting");
+
+//PAINTING API
+Route::post("painting", "PaintsController@put");
+Route::get("painting/allPaint", "PaintsController@request");
+Route::get("painting/paint/:id", "PaintsController@getImg");
