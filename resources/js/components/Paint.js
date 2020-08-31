@@ -7,7 +7,7 @@ const log = (...x) =>
     console.log(...x)
 }
 
-export const Paint = ( {setIsPaintMode, isPaintMode} ) =>
+export const Paint = ( {setImgState, imgState} ) =>
 {
     const min = 2
     const max = 15
@@ -18,7 +18,7 @@ export const Paint = ( {setIsPaintMode, isPaintMode} ) =>
     const [isDrawing, setIsDrawing] = useState(false)
     const canvasRef = useRef(null)
     const contextRef = useRef(null)
-    const [image, setImage] = useState(false)
+    const [image, setImage] = useState(imgState.imgURL)
     const [width, setWidth] = useState(5)
     const [paintMode, setPaintMode] = useState(true)
 
@@ -39,7 +39,6 @@ export const Paint = ( {setIsPaintMode, isPaintMode} ) =>
       canvas.height = parent.clientHeight
       canvas.width = parent.clientWidth
 
-
       const backgroundContext = canvas.getContext("2d");
       backgroundContext.fillStyle = "white";
       backgroundContext.fillRect(0, 0, parent.clientWidth, parent.clientHeight);
@@ -47,7 +46,6 @@ export const Paint = ( {setIsPaintMode, isPaintMode} ) =>
 
       //start drawing
       const canvasContext = canvas.getContext('2d')
-
       if(image)
       {
         let img = new Image
@@ -93,6 +91,12 @@ export const Paint = ( {setIsPaintMode, isPaintMode} ) =>
         axios.post("/painting", {'imgUrl':image}).then( response =>{
             alert("saved")
             log(response)
+            const {imgId, mode, ...rest} = imgState
+                setImgState({
+                    imgId: null,
+                    mode: !mode,
+                    ...rest,
+                })
         } ).catch( err => {
             if(err.response.status === 403)
                 alert("login to save")
@@ -138,10 +142,10 @@ export const Paint = ( {setIsPaintMode, isPaintMode} ) =>
                 </button>
                 <button type="button" className="no" onClick={ () =>
                                                     {
-                                                        const {imgId, mode} = isPaintMode
-                                                        setIsPaintMode({
-                                                            imgId,
+                                                        const {mode, ...rest} = imgState
+                                                        setImgState({
                                                             mode: !mode,
+                                                            ...rest,
                                                         })
                                                     }
                     } >

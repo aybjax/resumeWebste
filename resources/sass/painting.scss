@@ -42,6 +42,20 @@ body {
 
     justify-content: space-between;
 
+    button {
+        font: {
+            size: 20px;
+            weight: bold;
+        }
+        letter-spacing: 3px;
+        margin: {
+            top:variables.$padding;
+            bottom: variables.$padding;
+            left: auto;
+            right: auto;
+        }
+    }
+
     button[type="button"].yes {
         margin: {
             left: variables.$padding;
@@ -70,20 +84,6 @@ body {
 
         width: 100px;
     }
-
-    button {
-        font: {
-            size: 20px;
-            weight: bold;
-        }
-        letter-spacing: 3px;
-        margin: {
-            top:variables.$padding;
-            bottom: variables.$padding;
-            left: auto;
-            right: auto;
-        }
-    }
 }
 
 
@@ -104,14 +104,18 @@ img {
     //position: absolute;
 }
 
-.galery {
-    position: relative;
+.galery-wrapper {
     margin: {
         top: 150px;
         left: auto;
         right: auto;
         bottom: 150px;
     }
+    width: 1000px;
+}
+
+.galery {
+    position: relative;
     padding: 0;
     
     width: 1000px;

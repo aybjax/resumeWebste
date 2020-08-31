@@ -7,7 +7,7 @@ const log = (...x) =>
     console.log(...x)
 }
 
-export const View = ({setIsPaintMode, isPaintMode}) =>
+export const View = ({setImgState, imgState}) =>
 {
     const ratio = 2 //width/height
     const padding = 10 //padding between center and right/left
@@ -26,7 +26,9 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
         imgs: null,
         imgIndex:null,
         imgDB_ID: null,
+        imgSize: null,
     })
+
 
     const next = () =>{
         if(!imgs) return
@@ -60,10 +62,43 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
             ...rest
         })
     }
+
+    const deleteImg = () =>{
+        const {imgDB_ID, ...rest} = state
+        axios.delete(`painting/paint/${imgDB_ID}`)
+        .then(resp => {
+            alert("deleted")
+            const {bottomImgIndex, imgSize, imgs, imgIndex, imgDB_ID, ...rest} = state
+
+            imgs.splice(imgIndex, 1)
+            let newSize = imgSize - 1
+            let newIndex = imgIndex
+
+            if(newSize < 0)
+            {
+                newIndex = null
+            }else if(newIndex>newSize)
+            {
+                newIndex = newSize
+            }
+            
+            setState({
+                ...rest,
+                bottomImgIndex:newIndex,
+                imgs: imgs,
+                imgIndex:newIndex,
+                imgDB_ID: imgs[newIndex] ? imgs[newIndex].id : null,
+                imgSize: newIndex != null ? newSize : null,
+            })
+        })
+        .catch(err => {
+            alert(err)
+            log(err.message)
+        })
+    }
     
     useEffect(()=>
     {
-        isPaintMode
         const container = containerRef.current
         const containerWidth = container.clientWidth
         const containerHeight = container.clientHeight
@@ -78,23 +113,24 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
                 const underWidth = underHeight * 2
 
                 let index = null
-                if(isPaintMode.imgId)
+                if(imgState.imgId)
                 {
                     index = res.data.findIndex( (img)=>
                     {
-                        // debugger
-                        return isPaintMode.imgId === img.id
+
+                        return imgState.imgId === img.id
                     } )
                 }
 
                 let imgIndex;
+                const imgSize = res.data.length-1
                 if(index !== null)
                 {
                     imgIndex = index
                 } else
                 {
                     try {
-                        imgIndex = res.data.length-1
+                        imgIndex = imgSize
                     }catch
                     {
                        imgIndex = 0
@@ -108,11 +144,12 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
                     underHeight: underHeight,
                     underWidth: underWidth,
                     imgs: res.data,
-                    //bottomImgIndex: res.data.length-1,
                     bottomImgIndex: imgIndex,
                     imgIndex: imgIndex,
                     imgDB_ID: res.data[imgIndex].id,
+                    imgSize: imgSize,
                 })
+                
             })
         .catch( err=>{
             log(`Error: ${err}`)
@@ -120,7 +157,7 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
             setState({
                 centerWidth: containerWidth,
                 centerHeight: containerHeight,
-                rest,
+                ...rest,
             })
             alert('axios error')
         } )
@@ -141,9 +178,7 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
 
     let toRight;
     try{
-        //debugger
         toRight = freeSpace/(imgs.length-bottomImgIndex+1)
-        //debugger
     }catch{
         toRight = 0
     }
@@ -157,7 +192,6 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
     let indexRight;
     try {
         indexRight = imgs.length - bottomImgIndex - 2
-        //debugger
     }catch
     {
         indexRight = 0
@@ -166,6 +200,25 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
     let zInd = 0
     
     return (
+        <div className="canvas-container">
+            <div className="toolbar">
+                <button type="button" className="yes" onClick={()=>
+                {
+                    const {imgId, mode, imgURL, ...rest} = imgState
+                    setImgState({
+                        imgId: null,
+                        mode: !mode,
+                        imgURL: null,
+                        ...rest,
+                    })
+                }}>
+                    Create new
+                </button>
+
+                <button type="button" className="no" onClick={deleteImg}>
+                    Delete it
+                </button>
+            </div>
             <div className="galery" ref={containerRef}>
                 <img className="img-center"
                     id={imgDB_ID && {imgDB_ID} || null}
@@ -175,14 +228,17 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
                                 height:`${centerHeight}px`,
                             }
                         }
-                    src={imgs && imgs[imgIndex].url || (centerWidth && centerHeight && `https://via.placeholder.com/${centerWidth}x${centerHeight}`)}
+                    src={(imgs && imgIndex) && imgs[imgIndex].url/* || (centerWidth && centerHeight && `https://via.placeholder.com/${centerWidth}x${centerHeight}`)*/}
                     onClick = { () => 
                         {
-                            const {imgId, mode} = isPaintMode
-                            setIsPaintMode({
-                                imgId: imgDB_ID,
+                            const {imgId, mode, imgURL, ...rest} = imgState
+                            setImgState({
+                                imgId: imgs[imgIndex].id,
                                 mode: !mode,
+                                imgURL: imgs[imgIndex].url,
+                                ...rest,
                             })
+                            
                         }
                     }
                 />
@@ -237,5 +293,6 @@ export const View = ({setIsPaintMode, isPaintMode}) =>
                             }
                 </div>
             </div>
+        </div>
     )
 }

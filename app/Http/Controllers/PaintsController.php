@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Paint;
+use App\Http\Controllers\Throwable;
 
 class PaintsController extends Controller
 {
@@ -40,5 +41,18 @@ class PaintsController extends Controller
         }
 
         return Auth::user()->paints->id->url;
+    }
+
+    public function deleteImg($id){
+        if(!Auth::check())
+        {
+            return response("No access", 403);
+        }
+        try{
+            Auth::user()->paints()->findOrFail((int)$id)->delete();
+            return response("Delete", 200);
+        }catch(Throwable $err){
+            return response($err->message, 500);
+        }
     }
 }

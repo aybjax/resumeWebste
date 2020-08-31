@@ -30641,18 +30641,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var Container = function Container() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     imgId: null,
-    mode: false
+    mode: false,
+    imgURL: null,
+    imgs: []
   }),
       _useState2 = _slicedToArray(_useState, 2),
-      isPaintMode = _useState2[0],
-      setIsPaintMode = _useState2[1];
+      imgState = _useState2[0],
+      setImgState = _useState2[1];
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, isPaintMode.mode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Paint__WEBPACK_IMPORTED_MODULE_1__["Paint"], {
-    setIsPaintMode: setIsPaintMode,
-    isPaintMode: isPaintMode
-  }), !isPaintMode.mode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_2__["View"], {
-    setIsPaintMode: setIsPaintMode,
-    isPaintMode: isPaintMode
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, imgState.mode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Paint__WEBPACK_IMPORTED_MODULE_1__["Paint"], {
+    imgState: imgState,
+    setImgState: setImgState
+  }), !imgState.mode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_2__["View"], {
+    imgState: imgState,
+    setImgState: setImgState
   }));
 };
 
@@ -30672,6 +30674,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -30694,8 +30706,8 @@ var log = function log() {
 };
 
 var Paint = function Paint(_ref) {
-  var setIsPaintMode = _ref.setIsPaintMode,
-      isPaintMode = _ref.isPaintMode;
+  var setImgState = _ref.setImgState,
+      imgState = _ref.imgState;
   var min = 2;
   var max = 15;
   /****************** canvas stuff *********************/
@@ -30710,7 +30722,7 @@ var Paint = function Paint(_ref) {
   var canvasRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   var contextRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(imgState.imgURL),
       _useState4 = _slicedToArray(_useState3, 2),
       image = _useState4[0],
       setImage = _useState4[1];
@@ -30799,6 +30811,15 @@ var Paint = function Paint(_ref) {
       }).then(function (response) {
         alert("saved");
         log(response);
+
+        var imgId = imgState.imgId,
+            mode = imgState.mode,
+            rest = _objectWithoutProperties(imgState, ["imgId", "mode"]);
+
+        setImgState(_objectSpread({
+          imgId: null,
+          mode: !mode
+        }, rest));
       })["catch"](function (err) {
         if (err.response.status === 403) alert("login to save");else alert("status ".concat(err.response.status));
       });
@@ -30858,12 +30879,12 @@ var Paint = function Paint(_ref) {
     type: "button",
     className: "no",
     onClick: function onClick() {
-      var imgId = isPaintMode.imgId,
-          mode = isPaintMode.mode;
-      setIsPaintMode({
-        imgId: imgId,
+      var mode = imgState.mode,
+          rest = _objectWithoutProperties(imgState, ["mode"]);
+
+      setImgState(_objectSpread({
         mode: !mode
-      });
+      }, rest));
     }
   }, "Cancel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "canvas"
@@ -30924,8 +30945,8 @@ var log = function log() {
 };
 
 var View = function View(_ref) {
-  var setIsPaintMode = _ref.setIsPaintMode,
-      isPaintMode = _ref.isPaintMode;
+  var setImgState = _ref.setImgState,
+      imgState = _ref.imgState;
   var ratio = 2; //width/height
 
   var padding = 10; //padding between center and right/left
@@ -30944,7 +30965,8 @@ var View = function View(_ref) {
     bottomImgIndex: null,
     imgs: null,
     imgIndex: null,
-    imgDB_ID: null
+    imgDB_ID: null,
+    imgSize: null
   }),
       _useState2 = _slicedToArray(_useState, 2),
       state = _useState2[0],
@@ -30990,8 +31012,44 @@ var View = function View(_ref) {
     }, rest));
   };
 
+  var deleteImg = function deleteImg() {
+    var imgDB_ID = state.imgDB_ID,
+        rest = _objectWithoutProperties(state, ["imgDB_ID"]);
+
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("painting/paint/".concat(imgDB_ID)).then(function (resp) {
+      alert("deleted");
+
+      var bottomImgIndex = state.bottomImgIndex,
+          imgSize = state.imgSize,
+          imgs = state.imgs,
+          imgIndex = state.imgIndex,
+          imgDB_ID = state.imgDB_ID,
+          rest = _objectWithoutProperties(state, ["bottomImgIndex", "imgSize", "imgs", "imgIndex", "imgDB_ID"]);
+
+      imgs.splice(imgIndex, 1);
+      var newSize = imgSize - 1;
+      var newIndex = imgIndex;
+
+      if (newSize < 0) {
+        newIndex = null;
+      } else if (newIndex > newSize) {
+        newIndex = newSize;
+      }
+
+      setState(_objectSpread(_objectSpread({}, rest), {}, {
+        bottomImgIndex: newIndex,
+        imgs: imgs,
+        imgIndex: newIndex,
+        imgDB_ID: imgs[newIndex] ? imgs[newIndex].id : null,
+        imgSize: newIndex != null ? newSize : null
+      }));
+    })["catch"](function (err) {
+      alert(err);
+      log(err.message);
+    });
+  };
+
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    isPaintMode;
     var container = containerRef.current;
     var containerWidth = container.clientWidth;
     var containerHeight = container.clientHeight;
@@ -31004,20 +31062,20 @@ var View = function View(_ref) {
       var underWidth = underHeight * 2;
       var index = null;
 
-      if (isPaintMode.imgId) {
+      if (imgState.imgId) {
         index = res.data.findIndex(function (img) {
-          // debugger
-          return isPaintMode.imgId === img.id;
+          return imgState.imgId === img.id;
         });
       }
 
       var imgIndex;
+      var imgSize = res.data.length - 1;
 
       if (index !== null) {
         imgIndex = index;
       } else {
         try {
-          imgIndex = res.data.length - 1;
+          imgIndex = imgSize;
         } catch (_unused) {
           imgIndex = 0;
         }
@@ -31031,10 +31089,10 @@ var View = function View(_ref) {
         underHeight: underHeight,
         underWidth: underWidth,
         imgs: res.data,
-        //bottomImgIndex: res.data.length-1,
         bottomImgIndex: imgIndex,
         imgIndex: imgIndex,
-        imgDB_ID: res.data[imgIndex].id
+        imgDB_ID: res.data[imgIndex].id,
+        imgSize: imgSize
       });
     })["catch"](function (err) {
       log("Error: ".concat(err));
@@ -31043,11 +31101,10 @@ var View = function View(_ref) {
           centerHeight = state.centerHeight,
           rest = _objectWithoutProperties(state, ["centerWidth", "centerHeight"]);
 
-      setState({
+      setState(_objectSpread({
         centerWidth: containerWidth,
-        centerHeight: containerHeight,
-        rest: rest
-      });
+        centerHeight: containerHeight
+      }, rest));
       alert('axios error');
     });
   }, []); //calculation stuff
@@ -31074,8 +31131,7 @@ var View = function View(_ref) {
   var toRight;
 
   try {
-    //debugger
-    toRight = freeSpace / (imgs.length - bottomImgIndex + 1); //debugger
+    toRight = freeSpace / (imgs.length - bottomImgIndex + 1);
   } catch (_unused3) {
     toRight = 0;
   }
@@ -31087,13 +31143,36 @@ var View = function View(_ref) {
   var indexRight;
 
   try {
-    indexRight = imgs.length - bottomImgIndex - 2; //debugger
+    indexRight = imgs.length - bottomImgIndex - 2;
   } catch (_unused4) {
     indexRight = 0;
   }
 
   var zInd = 0;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "canvas-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "toolbar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "yes",
+    onClick: function onClick() {
+      var imgId = imgState.imgId,
+          mode = imgState.mode,
+          imgURL = imgState.imgURL,
+          rest = _objectWithoutProperties(imgState, ["imgId", "mode", "imgURL"]);
+
+      setImgState(_objectSpread({
+        imgId: null,
+        mode: !mode,
+        imgURL: null
+      }, rest));
+    }
+  }, "Create new"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "button",
+    className: "no",
+    onClick: deleteImg
+  }, "Delete it")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "galery",
     ref: containerRef
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -31105,15 +31184,20 @@ var View = function View(_ref) {
       width: "".concat(centerWidth, "px"),
       height: "".concat(centerHeight, "px")
     },
-    src: imgs && imgs[imgIndex].url || centerWidth && centerHeight && "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight),
+    src: imgs && imgIndex && imgs[imgIndex].url
+    /* || (centerWidth && centerHeight && `https://via.placeholder.com/${centerWidth}x${centerHeight}`)*/
+    ,
     onClick: function onClick() {
-      debugger;
-      var imgId = isPaintMode.imgId,
-          mode = isPaintMode.mode;
-      setIsPaintMode({
-        imgId: imgDB_ID,
-        mode: !mode
-      });
+      var imgId = imgState.imgId,
+          mode = imgState.mode,
+          imgURL = imgState.imgURL,
+          rest = _objectWithoutProperties(imgState, ["imgId", "mode", "imgURL"]);
+
+      setImgState(_objectSpread({
+        imgId: imgs[imgIndex].id,
+        mode: !mode,
+        imgURL: imgs[imgIndex].url
+      }, rest));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
@@ -31161,7 +31245,7 @@ var View = function View(_ref) {
       src: item.url,
       onClick: fnx
     });
-  })));
+  }))));
 };
 
 /***/ }),
