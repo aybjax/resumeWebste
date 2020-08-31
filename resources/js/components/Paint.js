@@ -88,21 +88,45 @@ export const Paint = ( {setImgState, imgState} ) =>
 
     const saveImage = (image) => () =>
     {
-        axios.post("/painting", {'imgUrl':image}).then( response =>{
-            alert("saved")
-            log(response)
-            const {imgId, mode, ...rest} = imgState
-                setImgState({
-                    imgId: null,
-                    mode: !mode,
-                    ...rest,
-                })
-        } ).catch( err => {
-            if(err.response.status === 403)
-                alert("login to save")
-            else
-                alert(`status ${err.response.status}`)
-        } )
+        debugger
+        if(imgState.imgId === null)
+        {
+            axios.post("/painting", {'imgUrl':image}).then( response =>{
+                alert("saved")
+                log(response)
+                const {imgId, mode, ...rest} = imgState
+                    setImgState({
+                        imgId: null,
+                        mode: !mode,
+                        ...rest,
+                    })
+            } ).catch( err => {
+                if(err.response.status === 403)
+                    alert("login to save")
+                else
+                    alert(`status ${err.response.status}`)
+            } )
+        }else
+        {
+            axios.patch(`/painting/paint/${imgState.imgId}`, {'imgUrl':image}).then( response =>{
+                alert("patched")
+                log(response)
+                const {imgIndex, mode, imgs, imgURL, ...rest} = imgState
+                imgs[imgIndex].url = image
+                    setImgState({
+                        imgIndex,
+                        mode: !mode,
+                        imgs,
+                        imgURL: image,
+                        ...rest,
+                    })
+            } ).catch( err => {
+                if(err.response.status === 403)
+                    alert("login to save")
+                else
+                    alert(`status ${err.response.status}`)
+            } )
+        }
     }
 
     /****************** input color functions *********************/

@@ -98,7 +98,6 @@ export const View = ({setImgState, imgState}) =>
                 })
         })
         .catch(err => {
-            debugger
             alert(err)
             log(err.message)
         })
@@ -107,7 +106,6 @@ export const View = ({setImgState, imgState}) =>
     
     useEffect(()=>
     {
-        debugger
         const container = containerRef.current
         const containerWidth = container.clientWidth
         const containerHeight = container.clientHeight

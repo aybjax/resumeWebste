@@ -30815,23 +30815,50 @@ var Paint = function Paint(_ref) {
 
   var saveImage = function saveImage(image) {
     return function () {
-      axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/painting", {
-        'imgUrl': image
-      }).then(function (response) {
-        alert("saved");
-        log(response);
+      debugger;
 
-        var imgId = imgState.imgId,
-            mode = imgState.mode,
-            rest = _objectWithoutProperties(imgState, ["imgId", "mode"]);
+      if (imgState.imgId === null) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/painting", {
+          'imgUrl': image
+        }).then(function (response) {
+          alert("saved");
+          log(response);
 
-        setImgState(_objectSpread({
-          imgId: null,
-          mode: !mode
-        }, rest));
-      })["catch"](function (err) {
-        if (err.response.status === 403) alert("login to save");else alert("status ".concat(err.response.status));
-      });
+          var imgId = imgState.imgId,
+              mode = imgState.mode,
+              rest = _objectWithoutProperties(imgState, ["imgId", "mode"]);
+
+          setImgState(_objectSpread({
+            imgId: null,
+            mode: !mode
+          }, rest));
+        })["catch"](function (err) {
+          if (err.response.status === 403) alert("login to save");else alert("status ".concat(err.response.status));
+        });
+      } else {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch("/painting/paint/".concat(imgState.imgId), {
+          'imgUrl': image
+        }).then(function (response) {
+          alert("patched");
+          log(response);
+
+          var imgIndex = imgState.imgIndex,
+              mode = imgState.mode,
+              imgs = imgState.imgs,
+              imgURL = imgState.imgURL,
+              rest = _objectWithoutProperties(imgState, ["imgIndex", "mode", "imgs", "imgURL"]);
+
+          imgs[imgIndex].url = image;
+          setImgState(_objectSpread({
+            imgIndex: imgIndex,
+            mode: !mode,
+            imgs: imgs,
+            imgURL: image
+          }, rest));
+        })["catch"](function (err) {
+          if (err.response.status === 403) alert("login to save");else alert("status ".concat(err.response.status));
+        });
+      }
     };
   };
   /****************** input color functions *********************/
@@ -31041,14 +31068,12 @@ var View = function View(_ref) {
         imgURL: null
       }));
     })["catch"](function (err) {
-      debugger;
       alert(err);
       log(err.message);
     });
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    debugger;
     var container = containerRef.current;
     var containerWidth = container.clientWidth;
     var containerHeight = container.clientHeight;

@@ -50,9 +50,19 @@ class PaintsController extends Controller
         }
 
         Auth::user()->paints->find($id)->destroy($id);
-
-        echo Auth::user()->paints;
         
         return;
     }
+
+    public function patchImg(Request $request, $id){
+        if(!Auth::check())
+        {
+            return response("No access", 403);
+        }
+
+        Auth::user()->paints->find($id)->update(['url'=>$request->imgUrl]);
+
+        return;
+    }
+
 }
