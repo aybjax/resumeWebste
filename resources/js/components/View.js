@@ -15,90 +15,99 @@ export const View = ({setImgState, imgState}) =>
     // // const contextRef = useRef(null)
     // const [imgs, setImgs] = useState(null)
     const containerRef = useRef(null)
-    const [state, setState] = useState({
-        centerWidth: 0,
-        centerHeight: 0,
-        centerStart: 0,
-        centerTop: 0,
-        underHeight: 0,
-        underWidth: 0,
-        bottomImgIndex:null,
-        imgs: null,
-        imgIndex:null,
-        imgDB_ID: null,
-        imgSize: null,
-    })
-
 
     const next = () =>{
-        if(!imgs) return
-        if(state.bottomImgIndex == imgs.length-1) return
-        const {bottomImgIndex, ...rest} = state
+        
+        if(!imgState.imgs) return
+        if(imgState.bottomImgIndex === imgState.imgs.length-1) return
+        const {bottomImgIndex, ...rest} = imgState
         const nextImg = bottomImgIndex+1
-        setState({
+        setImgState({
             bottomImgIndex: nextImg,
             ...rest
         })
     }
 
     const prev = () =>{
-        if(!imgs) return
-        if(state.bottomImgIndex == 0) return
-        const {bottomImgIndex, ...rest} = state
+        
+        if(!imgState.imgs) return
+        if(imgState.bottomImgIndex == 0) return
+        const {bottomImgIndex, ...rest} = imgState
         const nextImg = bottomImgIndex-1
-        setState({
+        setImgState({
             bottomImgIndex: nextImg,
             ...rest
         })
     }
 
     const renderImg = () =>{
-        if(!imgs) return
-        const {imgIndex, imgDB_ID, ...rest} = state
-        const nextImg = bottomImgIndex
-        setState({
+        
+        if(!imgState.imgs) return
+        const {imgIndex, imgId, imgURL, ...rest} = imgState
+        log(imgURL)
+        alert(imgURL)
+        const nextImg = imgState.bottomImgIndex
+        const imgs = imgState.imgs
+        setImgState({
             imgIndex: nextImg,
-            imgDB_ID: imgs[nextImg].id,
+            imgId: imgs[nextImg].id,
+            imgURL: imgs[nextImg].url,
             ...rest
         })
     }
 
     const deleteImg = () =>{
-        const {imgDB_ID, ...rest} = state
-        axios.delete(`painting/paint/${imgDB_ID}`)
-        .then(resp => {
+        const {imgId, ...rest} = imgState
+        axios.delete(`painting/paint/${imgId}`)
+        .then(res => {
             alert("deleted")
-            const {bottomImgIndex, imgSize, imgs, imgIndex, imgDB_ID, ...rest} = state
+            // const {bottomImgIndex, imgSize, imgs, imgIndex, imgId, imgURL, ...rest} = imgState
 
-            imgs.splice(imgIndex, 1)
-            let newSize = imgSize - 1
-            let newIndex = imgIndex
+            // imgs.splice(imgIndex, 1)
+            // let newSize = imgs.length - 1
+            // let newIndex = imgIndex
 
-            if(newSize < 0)
-            {
-                newIndex = null
-            }else if(newIndex>newSize)
-            {
-                newIndex = newSize
-            }
+            // if(newSize < 0)
+            // {
+            //     newIndex = null
+            //     newSize = null
+            // }else if(newIndex>newSize)
+            // {
+            //     newIndex = newSize
+            // }
             
-            setState({
-                ...rest,
-                bottomImgIndex:newIndex,
-                imgs: imgs,
-                imgIndex:newIndex,
-                imgDB_ID: imgs[newIndex] ? imgs[newIndex].id : null,
-                imgSize: newIndex != null ? newSize : null,
-            })
+            // setImgState({
+            //     ...rest,
+            //     bottomImgIndex:newIndex,
+            //     imgs: imgs,
+            //     imgIndex:newIndex,
+            //     imgId: newIndex ? imgs[newIndex].id : null,
+            //     imgSize: newSize,
+            //     imgURL: newIndex ? imgs[newIndex].url : null
+            // })
+
+            const {bottomImgIndex, imgSize, imgs, imgIndex, imgId, imgURL, ...rest} = imgState
+            setImgState({
+                    ...rest,
+                    bottomImgIndex: null,
+                    imgs: null,
+                    imgIndex: null,
+                    imgId: null,
+                    imgSize: null,
+                    imgURL: null,
+                })
         })
         .catch(err => {
+            debugger
             alert(err)
             log(err.message)
         })
+
     }
     
     useEffect(()=>
     {
+        debugger
         const container = containerRef.current
         const containerWidth = container.clientWidth
         const containerHeight = container.clientHeight
@@ -113,30 +122,26 @@ export const View = ({setImgState, imgState}) =>
                 const underWidth = underHeight * 2
 
                 let index = null
-                if(imgState.imgId)
+                const imgSize = res.data.length-1
+                if(imgState.imgId !== null)
                 {
                     index = res.data.findIndex( (img)=>
                     {
 
                         return imgState.imgId === img.id
                     } )
+                }else
+                {
+                    index = imgSize
                 }
 
-                let imgIndex;
-                const imgSize = res.data.length-1
-                if(index !== null)
+
+                if(res.data.length>0)
                 {
-                    imgIndex = index
-                } else
-                {
-                    try {
-                        imgIndex = imgSize
-                    }catch
-                    {
-                       imgIndex = 0
-                    }
+                    log(res.data)
+                    log(index)
                 }
-                setState({
+                setImgState({
                     centerWidth: centerWidth,
                     centerHeight: centerHeight,
                     centerStart: centerStart,
@@ -144,29 +149,30 @@ export const View = ({setImgState, imgState}) =>
                     underHeight: underHeight,
                     underWidth: underWidth,
                     imgs: res.data,
-                    bottomImgIndex: imgIndex,
-                    imgIndex: imgIndex,
-                    imgDB_ID: res.data[imgIndex].id,
+                    bottomImgIndex: index,
+                    imgIndex: index,
+                    imgId: (res.data.length>0 ? res.data[index].id : null),
                     imgSize: imgSize,
+                    imgURL: (res.data.length>0 ? res.data[index].url : `https://via.placeholder.com/${centerWidth}x${centerHeight}`),
                 })
-                
             })
         .catch( err=>{
             log(`Error: ${err}`)
-            const {centerWidth, centerHeight, ...rest} = state
-            setState({
+            const {centerWidth, centerHeight, imgURL, ...rest} = imgState
+            setImgState({
                 centerWidth: containerWidth,
                 centerHeight: containerHeight,
+                imgURL: `https://via.placeholder.com/${centerWidth}x${centerHeight}`,
                 ...rest,
             })
             alert('axios error')
         } )
-    }, [])
+    }, [imgState.imgSize])
 
 
     //calculation stuff
-    const {imgDB_ID, imgIndex, imgs, bottomImgIndex, centerWidth, centerHeight, centerStart, centerTop, underHeight, underWidth} = state;
-    
+    const {imgId, imgIndex, imgURL, imgs, bottomImgIndex, centerWidth, centerHeight, underHeight, underWidth} = imgState;
+
     const freeSpace = centerWidth/2 - underWidth/2 - padding - underHeight/2
     let toLeft;
     try{
@@ -182,7 +188,7 @@ export const View = ({setImgState, imgState}) =>
     }catch{
         toRight = 0
     }
-
+    
     const maxSpace = (underHeight/2)*0.9
     toLeft = maxSpace < toLeft ? maxSpace : toLeft
     toRight = maxSpace < toRight ? maxSpace : toRight
@@ -221,21 +227,19 @@ export const View = ({setImgState, imgState}) =>
             </div>
             <div className="galery" ref={containerRef}>
                 <img className="img-center"
-                    id={imgDB_ID && {imgDB_ID} || null}
+                    id={imgId && {imgId} || "null"}
                     style={
                             {
                                 width:`${centerWidth}px`,
                                 height:`${centerHeight}px`,
                             }
                         }
-                    src={(imgs && imgIndex) && imgs[imgIndex].url/* || (centerWidth && centerHeight && `https://via.placeholder.com/${centerWidth}x${centerHeight}`)*/}
+                    src={imgURL}
                     onClick = { () => 
                         {
-                            const {imgId, mode, imgURL, ...rest} = imgState
+                            const {mode, ...rest} = imgState
                             setImgState({
-                                imgId: imgs[imgIndex].id,
                                 mode: !mode,
-                                imgURL: imgs[imgIndex].url,
                                 ...rest,
                             })
                             
@@ -250,7 +254,7 @@ export const View = ({setImgState, imgState}) =>
                                     const styling = {}
                                     const diff = (underWidth - underHeight)/2
                                     let fnx
-                                    if(index == bottomImgIndex)
+                                    if(index === bottomImgIndex)
                                     {
                                         styling.left = `${(centerWidth-underWidth)/2}px`
                                         styling.width = `${underWidth}px`
@@ -271,7 +275,6 @@ export const View = ({setImgState, imgState}) =>
                                         }else
                                         {
                                             styling.transform = 'rotate(90deg)'
-                                            //debugger
                                             styling.left = `${centerWidth - underHeight + (diff)/2 - toRight*indexRight--}px`
                                             styling.bottom = `${(diff)/2}px`
                                             styling.zIndex = `${zInd--}`

@@ -30640,10 +30640,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Container = function Container() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    imgId: null,
     mode: false,
+    centerWidth: 0,
+    centerHeight: 0,
+    centerStart: 0,
+    centerTop: 0,
+    underHeight: 0,
+    underWidth: 0,
+    bottomImgIndex: null,
+    imgs: null,
+    imgIndex: null,
     imgURL: null,
-    imgs: []
+    imgId: null,
+    imgSize: null
   }),
       _useState2 = _slicedToArray(_useState, 2),
       imgState = _useState2[0],
@@ -30714,13 +30723,13 @@ var Paint = function Paint(_ref) {
 
   /****************** hooks *********************/
 
+  var canvasRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  var contextRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
       _useState2 = _slicedToArray(_useState, 2),
       isDrawing = _useState2[0],
       setIsDrawing = _useState2[1];
-
-  var canvasRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  var contextRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(imgState.imgURL),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -30923,18 +30932,6 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -30955,101 +30952,103 @@ var View = function View(_ref) {
 
   var containerRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    centerWidth: 0,
-    centerHeight: 0,
-    centerStart: 0,
-    centerTop: 0,
-    underHeight: 0,
-    underWidth: 0,
-    bottomImgIndex: null,
-    imgs: null,
-    imgIndex: null,
-    imgDB_ID: null,
-    imgSize: null
-  }),
-      _useState2 = _slicedToArray(_useState, 2),
-      state = _useState2[0],
-      setState = _useState2[1];
-
   var next = function next() {
-    if (!imgs) return;
-    if (state.bottomImgIndex == imgs.length - 1) return;
+    if (!imgState.imgs) return;
+    if (imgState.bottomImgIndex === imgState.imgs.length - 1) return;
 
-    var bottomImgIndex = state.bottomImgIndex,
-        rest = _objectWithoutProperties(state, ["bottomImgIndex"]);
+    var bottomImgIndex = imgState.bottomImgIndex,
+        rest = _objectWithoutProperties(imgState, ["bottomImgIndex"]);
 
     var nextImg = bottomImgIndex + 1;
-    setState(_objectSpread({
+    setImgState(_objectSpread({
       bottomImgIndex: nextImg
     }, rest));
   };
 
   var prev = function prev() {
-    if (!imgs) return;
-    if (state.bottomImgIndex == 0) return;
+    if (!imgState.imgs) return;
+    if (imgState.bottomImgIndex == 0) return;
 
-    var bottomImgIndex = state.bottomImgIndex,
-        rest = _objectWithoutProperties(state, ["bottomImgIndex"]);
+    var bottomImgIndex = imgState.bottomImgIndex,
+        rest = _objectWithoutProperties(imgState, ["bottomImgIndex"]);
 
     var nextImg = bottomImgIndex - 1;
-    setState(_objectSpread({
+    setImgState(_objectSpread({
       bottomImgIndex: nextImg
     }, rest));
   };
 
   var renderImg = function renderImg() {
-    if (!imgs) return;
+    if (!imgState.imgs) return;
 
-    var imgIndex = state.imgIndex,
-        imgDB_ID = state.imgDB_ID,
-        rest = _objectWithoutProperties(state, ["imgIndex", "imgDB_ID"]);
+    var imgIndex = imgState.imgIndex,
+        imgId = imgState.imgId,
+        imgURL = imgState.imgURL,
+        rest = _objectWithoutProperties(imgState, ["imgIndex", "imgId", "imgURL"]);
 
-    var nextImg = bottomImgIndex;
-    setState(_objectSpread({
+    log(imgURL);
+    alert(imgURL);
+    var nextImg = imgState.bottomImgIndex;
+    var imgs = imgState.imgs;
+    setImgState(_objectSpread({
       imgIndex: nextImg,
-      imgDB_ID: imgs[nextImg].id
+      imgId: imgs[nextImg].id,
+      imgURL: imgs[nextImg].url
     }, rest));
   };
 
   var deleteImg = function deleteImg() {
-    var imgDB_ID = state.imgDB_ID,
-        rest = _objectWithoutProperties(state, ["imgDB_ID"]);
+    var imgId = imgState.imgId,
+        rest = _objectWithoutProperties(imgState, ["imgId"]);
 
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("painting/paint/".concat(imgDB_ID)).then(function (resp) {
-      alert("deleted");
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("painting/paint/".concat(imgId)).then(function (res) {
+      alert("deleted"); // const {bottomImgIndex, imgSize, imgs, imgIndex, imgId, imgURL, ...rest} = imgState
+      // imgs.splice(imgIndex, 1)
+      // let newSize = imgs.length - 1
+      // let newIndex = imgIndex
+      // if(newSize < 0)
+      // {
+      //     newIndex = null
+      //     newSize = null
+      // }else if(newIndex>newSize)
+      // {
+      //     newIndex = newSize
+      // }
+      // setImgState({
+      //     ...rest,
+      //     bottomImgIndex:newIndex,
+      //     imgs: imgs,
+      //     imgIndex:newIndex,
+      //     imgId: newIndex ? imgs[newIndex].id : null,
+      //     imgSize: newSize,
+      //     imgURL: newIndex ? imgs[newIndex].url : null
+      // })
 
-      var bottomImgIndex = state.bottomImgIndex,
-          imgSize = state.imgSize,
-          imgs = state.imgs,
-          imgIndex = state.imgIndex,
-          imgDB_ID = state.imgDB_ID,
-          rest = _objectWithoutProperties(state, ["bottomImgIndex", "imgSize", "imgs", "imgIndex", "imgDB_ID"]);
+      var bottomImgIndex = imgState.bottomImgIndex,
+          imgSize = imgState.imgSize,
+          imgs = imgState.imgs,
+          imgIndex = imgState.imgIndex,
+          imgId = imgState.imgId,
+          imgURL = imgState.imgURL,
+          rest = _objectWithoutProperties(imgState, ["bottomImgIndex", "imgSize", "imgs", "imgIndex", "imgId", "imgURL"]);
 
-      imgs.splice(imgIndex, 1);
-      var newSize = imgSize - 1;
-      var newIndex = imgIndex;
-
-      if (newSize < 0) {
-        newIndex = null;
-      } else if (newIndex > newSize) {
-        newIndex = newSize;
-      }
-
-      setState(_objectSpread(_objectSpread({}, rest), {}, {
-        bottomImgIndex: newIndex,
-        imgs: imgs,
-        imgIndex: newIndex,
-        imgDB_ID: imgs[newIndex] ? imgs[newIndex].id : null,
-        imgSize: newIndex != null ? newSize : null
+      setImgState(_objectSpread(_objectSpread({}, rest), {}, {
+        bottomImgIndex: null,
+        imgs: null,
+        imgIndex: null,
+        imgId: null,
+        imgSize: null,
+        imgURL: null
       }));
     })["catch"](function (err) {
+      debugger;
       alert(err);
       log(err.message);
     });
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    debugger;
     var container = containerRef.current;
     var containerWidth = container.clientWidth;
     var containerHeight = container.clientHeight;
@@ -31061,27 +31060,22 @@ var View = function View(_ref) {
       var underHeight = containerHeight - centerHeight;
       var underWidth = underHeight * 2;
       var index = null;
+      var imgSize = res.data.length - 1;
 
-      if (imgState.imgId) {
+      if (imgState.imgId !== null) {
         index = res.data.findIndex(function (img) {
           return imgState.imgId === img.id;
         });
-      }
-
-      var imgIndex;
-      var imgSize = res.data.length - 1;
-
-      if (index !== null) {
-        imgIndex = index;
       } else {
-        try {
-          imgIndex = imgSize;
-        } catch (_unused) {
-          imgIndex = 0;
-        }
+        index = imgSize;
       }
 
-      setState({
+      if (res.data.length > 0) {
+        log(res.data);
+        log(index);
+      }
+
+      setImgState({
         centerWidth: centerWidth,
         centerHeight: centerHeight,
         centerStart: centerStart,
@@ -31089,42 +31083,44 @@ var View = function View(_ref) {
         underHeight: underHeight,
         underWidth: underWidth,
         imgs: res.data,
-        bottomImgIndex: imgIndex,
-        imgIndex: imgIndex,
-        imgDB_ID: res.data[imgIndex].id,
-        imgSize: imgSize
+        bottomImgIndex: index,
+        imgIndex: index,
+        imgId: res.data.length > 0 ? res.data[index].id : null,
+        imgSize: imgSize,
+        imgURL: res.data.length > 0 ? res.data[index].url : "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight)
       });
     })["catch"](function (err) {
       log("Error: ".concat(err));
 
-      var centerWidth = state.centerWidth,
-          centerHeight = state.centerHeight,
-          rest = _objectWithoutProperties(state, ["centerWidth", "centerHeight"]);
+      var centerWidth = imgState.centerWidth,
+          centerHeight = imgState.centerHeight,
+          imgURL = imgState.imgURL,
+          rest = _objectWithoutProperties(imgState, ["centerWidth", "centerHeight", "imgURL"]);
 
-      setState(_objectSpread({
+      setImgState(_objectSpread({
         centerWidth: containerWidth,
-        centerHeight: containerHeight
+        centerHeight: containerHeight,
+        imgURL: "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight)
       }, rest));
       alert('axios error');
     });
-  }, []); //calculation stuff
+  }, [imgState.imgSize]); //calculation stuff
 
-  var imgDB_ID = state.imgDB_ID,
-      imgIndex = state.imgIndex,
-      imgs = state.imgs,
-      bottomImgIndex = state.bottomImgIndex,
-      centerWidth = state.centerWidth,
-      centerHeight = state.centerHeight,
-      centerStart = state.centerStart,
-      centerTop = state.centerTop,
-      underHeight = state.underHeight,
-      underWidth = state.underWidth;
+  var imgId = imgState.imgId,
+      imgIndex = imgState.imgIndex,
+      imgURL = imgState.imgURL,
+      imgs = imgState.imgs,
+      bottomImgIndex = imgState.bottomImgIndex,
+      centerWidth = imgState.centerWidth,
+      centerHeight = imgState.centerHeight,
+      underHeight = imgState.underHeight,
+      underWidth = imgState.underWidth;
   var freeSpace = centerWidth / 2 - underWidth / 2 - padding - underHeight / 2;
   var toLeft;
 
   try {
     toLeft = freeSpace / bottomImgIndex;
-  } catch (_unused2) {
+  } catch (_unused) {
     toLeft = 0;
   }
 
@@ -31132,7 +31128,7 @@ var View = function View(_ref) {
 
   try {
     toRight = freeSpace / (imgs.length - bottomImgIndex + 1);
-  } catch (_unused3) {
+  } catch (_unused2) {
     toRight = 0;
   }
 
@@ -31144,7 +31140,7 @@ var View = function View(_ref) {
 
   try {
     indexRight = imgs.length - bottomImgIndex - 2;
-  } catch (_unused4) {
+  } catch (_unused3) {
     indexRight = 0;
   }
 
@@ -31177,26 +31173,20 @@ var View = function View(_ref) {
     ref: containerRef
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "img-center",
-    id: imgDB_ID && {
-      imgDB_ID: imgDB_ID
-    } || null,
+    id: imgId && {
+      imgId: imgId
+    } || "null",
     style: {
       width: "".concat(centerWidth, "px"),
       height: "".concat(centerHeight, "px")
     },
-    src: imgs && imgIndex && imgs[imgIndex].url
-    /* || (centerWidth && centerHeight && `https://via.placeholder.com/${centerWidth}x${centerHeight}`)*/
-    ,
+    src: imgURL,
     onClick: function onClick() {
-      var imgId = imgState.imgId,
-          mode = imgState.mode,
-          imgURL = imgState.imgURL,
-          rest = _objectWithoutProperties(imgState, ["imgId", "mode", "imgURL"]);
+      var mode = imgState.mode,
+          rest = _objectWithoutProperties(imgState, ["mode"]);
 
       setImgState(_objectSpread({
-        imgId: imgs[imgIndex].id,
-        mode: !mode,
-        imgURL: imgs[imgIndex].url
+        mode: !mode
       }, rest));
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -31209,7 +31199,7 @@ var View = function View(_ref) {
     var diff = (underWidth - underHeight) / 2;
     var fnx;
 
-    if (index == bottomImgIndex) {
+    if (index === bottomImgIndex) {
       styling.left = "".concat((centerWidth - underWidth) / 2, "px");
       styling.width = "".concat(underWidth, "px");
       styling.height = "".concat(underHeight, "px");
@@ -31226,8 +31216,7 @@ var View = function View(_ref) {
         styling.borderBottom = "2px solid red";
         fnx = prev;
       } else {
-        styling.transform = 'rotate(90deg)'; //debugger
-
+        styling.transform = 'rotate(90deg)';
         styling.left = "".concat(centerWidth - underHeight + diff / 2 - toRight * indexRight--, "px");
         styling.bottom = "".concat(diff / 2, "px");
         styling.zIndex = "".concat(zInd--);

@@ -5,10 +5,19 @@ import {View} from './View';
 export const Container = () =>
 {
     const [imgState, setImgState] = useState({
-        imgId: null,
         mode: false,
+        centerWidth: 0,
+        centerHeight: 0,
+        centerStart: 0,
+        centerTop: 0,
+        underHeight: 0,
+        underWidth: 0,
+        bottomImgIndex:null,
+        imgs: null,
+        imgIndex:null,
         imgURL: null,
-        imgs: [],
+        imgId: null,
+        imgSize: null,
     })
 
     return (

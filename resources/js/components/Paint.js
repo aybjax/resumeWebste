@@ -15,9 +15,9 @@ export const Paint = ( {setImgState, imgState} ) =>
     /****************** canvas stuff *********************/
 
     /****************** hooks *********************/
-    const [isDrawing, setIsDrawing] = useState(false)
     const canvasRef = useRef(null)
     const contextRef = useRef(null)
+    const [isDrawing, setIsDrawing] = useState(false)
     const [image, setImage] = useState(imgState.imgURL)
     const [width, setWidth] = useState(5)
     const [paintMode, setPaintMode] = useState(true)

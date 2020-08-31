@@ -46,5 +46,5 @@ Route::get("painting", 'PaintsController@index')->name("painting");
 //PAINTING API
 Route::post("painting", "PaintsController@put");
 Route::get("painting/allPaint", "PaintsController@request");
-//Route::get("painting/paint/:id", "PaintsController@getImg");
-Route::delete("painting/paint/{id}", "PaintsController@deleteImg");
+Route::get("painting/paint", "PaintsController@getImg");
+Route::delete("painting/paint/{id}", "PaintsController@deleteImg")->name('delete');

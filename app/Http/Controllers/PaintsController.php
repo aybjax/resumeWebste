@@ -31,16 +31,16 @@ class PaintsController extends Controller
             return response("No access", 403);
         }
 
-        return Auth::user()->paints;
+        return Auth::user()->paints->all();
     }
 
-    public function getImg(Request $request, $id){
+    public function getImg(){
         if(!Auth::check())
         {
             return response("No access", 403);
         }
 
-        return Auth::user()->paints->id->url;
+        return view("result");
     }
 
     public function deleteImg($id){
@@ -48,11 +48,11 @@ class PaintsController extends Controller
         {
             return response("No access", 403);
         }
-        try{
-            Auth::user()->paints()->findOrFail((int)$id)->delete();
-            return response("Delete", 200);
-        }catch(Throwable $err){
-            return response($err->message, 500);
-        }
+
+        Auth::user()->paints->find($id)->destroy($id);
+
+        echo Auth::user()->paints;
+        
+        return;
     }
 }
