@@ -7,7 +7,7 @@ const log = (...x) =>
     console.log(...x)
 }
 
-export const View = ({changeMode}) =>
+export const View = ({setIsPaintMode, isPaintMode}) =>
 {
     const ratio = 2 //width/height
     const padding = 10 //padding between center and right/left
@@ -15,56 +15,55 @@ export const View = ({changeMode}) =>
     // // const contextRef = useRef(null)
     // const [imgs, setImgs] = useState(null)
     const containerRef = useRef(null)
-    const [centerImg, setCenterImg] = useState({
+    const [state, setState] = useState({
         centerWidth: 0,
         centerHeight: 0,
         centerStart: 0,
         centerTop: 0,
         underHeight: 0,
         underWidth: 0,
-        chooseImg:0,
+        bottomImgIndex:null,
         imgs: null,
-        toRender:null,
-        imgId: null,
+        imgIndex:null,
+        imgDB_ID: null,
     })
 
     const next = () =>{
         if(!imgs) return
-        if(centerImg.chooseImg == imgs.length-1) return
-        const {chooseImg, ...rest} = centerImg
-        const nextImg = chooseImg+1
-        log(`to next ${nextImg}`)
-        setCenterImg({
-            chooseImg: nextImg,
+        if(state.bottomImgIndex == imgs.length-1) return
+        const {bottomImgIndex, ...rest} = state
+        const nextImg = bottomImgIndex+1
+        setState({
+            bottomImgIndex: nextImg,
             ...rest
         })
     }
 
     const prev = () =>{
         if(!imgs) return
-        if(centerImg.chooseImg == 0) return
-        const {chooseImg, ...rest} = centerImg
-        const nextImg = chooseImg-1
-        log(`to prev ${nextImg}`)
-        setCenterImg({
-            chooseImg: nextImg,
+        if(state.bottomImgIndex == 0) return
+        const {bottomImgIndex, ...rest} = state
+        const nextImg = bottomImgIndex-1
+        setState({
+            bottomImgIndex: nextImg,
             ...rest
         })
     }
 
     const renderImg = () =>{
         if(!imgs) return
-        const {toRender,...rest} = centerImg
-        const nextImg = chooseImg
-        log(`render ${toRender}`)
-        setCenterImg({
-            toRender: nextImg,
+        const {imgIndex, imgDB_ID, ...rest} = state
+        const nextImg = bottomImgIndex
+        setState({
+            imgIndex: nextImg,
+            imgDB_ID: imgs[nextImg].id,
             ...rest
         })
     }
     
     useEffect(()=>
     {
+        isPaintMode
         const container = containerRef.current
         const containerWidth = container.clientWidth
         const containerHeight = container.clientHeight
@@ -77,10 +76,31 @@ export const View = ({changeMode}) =>
                 const centerTop = Math.floor((containerHeight - centerHeight) / 2)
                 const underHeight = containerHeight - centerHeight
                 const underWidth = underHeight * 2
-                
-                const toRender = 0
 
-                setCenterImg({
+                let index = null
+                if(isPaintMode.imgId)
+                {
+                    index = res.data.findIndex( (img)=>
+                    {
+                        // debugger
+                        return isPaintMode.imgId === img.id
+                    } )
+                }
+
+                let imgIndex;
+                if(index !== null)
+                {
+                    imgIndex = index
+                } else
+                {
+                    try {
+                        imgIndex = res.data.length-1
+                    }catch
+                    {
+                       imgIndex = 0
+                    }
+                }
+                setState({
                     centerWidth: centerWidth,
                     centerHeight: centerHeight,
                     centerStart: centerStart,
@@ -88,16 +108,16 @@ export const View = ({changeMode}) =>
                     underHeight: underHeight,
                     underWidth: underWidth,
                     imgs: res.data,
-                    //chooseImg: res.data.length-1,
-                    chooseImg: 0,
-                    toRender:0,
-                    imgId: res.data[toRender].id,
+                    //bottomImgIndex: res.data.length-1,
+                    bottomImgIndex: imgIndex,
+                    imgIndex: imgIndex,
+                    imgDB_ID: res.data[imgIndex].id,
                 })
             })
         .catch( err=>{
             log(`Error: ${err}`)
-            const {centerWidth, centerHeight, ...rest} = centerImg
-            setCenterImg({
+            const {centerWidth, centerHeight, ...rest} = state
+            setState({
                 centerWidth: containerWidth,
                 centerHeight: containerHeight,
                 rest,
@@ -108,12 +128,12 @@ export const View = ({changeMode}) =>
 
 
     //calculation stuff
-    const {imgId, toRender, imgs, chooseImg, centerWidth, centerHeight, centerStart, centerTop, underHeight, underWidth} = centerImg;
+    const {imgDB_ID, imgIndex, imgs, bottomImgIndex, centerWidth, centerHeight, centerStart, centerTop, underHeight, underWidth} = state;
     
     const freeSpace = centerWidth/2 - underWidth/2 - padding - underHeight/2
     let toLeft;
     try{
-        toLeft = freeSpace/chooseImg
+        toLeft = freeSpace/bottomImgIndex
     }catch
     {
         toLeft = 0
@@ -122,7 +142,7 @@ export const View = ({changeMode}) =>
     let toRight;
     try{
         //debugger
-        toRight = freeSpace/(imgs.length-chooseImg+1)
+        toRight = freeSpace/(imgs.length-bottomImgIndex+1)
         //debugger
     }catch{
         toRight = 0
@@ -136,7 +156,7 @@ export const View = ({changeMode}) =>
 
     let indexRight;
     try {
-        indexRight = imgs.length - chooseImg - 2
+        indexRight = imgs.length - bottomImgIndex - 2
         //debugger
     }catch
     {
@@ -148,15 +168,23 @@ export const View = ({changeMode}) =>
     return (
             <div className="galery" ref={containerRef}>
                 <img className="img-center"
-                    id={imgId && {imgId} || -1}
+                    id={imgDB_ID && {imgDB_ID} || null}
                     style={
                             {
                                 width:`${centerWidth}px`,
                                 height:`${centerHeight}px`,
                             }
                         }
-                    src={imgs && imgs[toRender].url || (centerWidth && centerHeight && `https://via.placeholder.com/${centerWidth}x${centerHeight}`)}
-                    onClick = {changeMode(imgId)}
+                    src={imgs && imgs[imgIndex].url || (centerWidth && centerHeight && `https://via.placeholder.com/${centerWidth}x${centerHeight}`)}
+                    onClick = { () => 
+                        {
+                            const {imgId, mode} = isPaintMode
+                            setIsPaintMode({
+                                imgId: imgDB_ID,
+                                mode: !mode,
+                            })
+                        }
+                    }
                 />
                 <div style={{top:`${centerHeight}px`}}>
                     {imgs &&           
@@ -166,7 +194,7 @@ export const View = ({changeMode}) =>
                                     const styling = {}
                                     const diff = (underWidth - underHeight)/2
                                     let fnx
-                                    if(index == chooseImg)
+                                    if(index == bottomImgIndex)
                                     {
                                         styling.left = `${(centerWidth-underWidth)/2}px`
                                         styling.width = `${underWidth}px`
@@ -176,7 +204,7 @@ export const View = ({changeMode}) =>
                                     {
                                         styling.width = `${underHeight}px`
                                         styling.height = `${underHeight/2}px`
-                                        if(index < chooseImg)
+                                        if(index < bottomImgIndex)
                                         {
                                             styling.transform = 'rotate(-90deg)'
                                             styling.left = `${(-1)*(diff)/2 + toLeft*indexLeft++}px`

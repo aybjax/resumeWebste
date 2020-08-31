@@ -5,27 +5,18 @@ import {View} from './View';
 export const Container = () =>
 {
     const [isPaintMode, setIsPaintMode] = useState({
-        imgId: -1,
+        imgId: null,
         mode: false,
     })
-
-    const changeMode = (id = -1) => () =>
-    {
-        const {imgId, mode} = isPaintMode
-        setIsPaintMode({
-            imgId: id,
-            mode: !mode,
-        })
-    }
 
     return (
         <>
         {
-            isPaintMode.mode && <Paint changeMode = {changeMode} isPaintMode = {isPaintMode}/>
+            isPaintMode.mode && <Paint setIsPaintMode = {setIsPaintMode} isPaintMode = {isPaintMode}/>
         }
 
         {
-            !isPaintMode.mode && <View changeMode = {changeMode}/>
+            !isPaintMode.mode && <View setIsPaintMode = {setIsPaintMode}  isPaintMode = {isPaintMode}/>
         }
         </>
     )

@@ -30640,30 +30640,19 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var Container = function Container() {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    imgId: -1,
+    imgId: null,
     mode: false
   }),
       _useState2 = _slicedToArray(_useState, 2),
       isPaintMode = _useState2[0],
       setIsPaintMode = _useState2[1];
 
-  var changeMode = function changeMode() {
-    var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
-    return function () {
-      var imgId = isPaintMode.imgId,
-          mode = isPaintMode.mode;
-      setIsPaintMode({
-        imgId: id,
-        mode: !mode
-      });
-    };
-  };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, isPaintMode.mode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Paint__WEBPACK_IMPORTED_MODULE_1__["Paint"], {
-    changeMode: changeMode,
+    setIsPaintMode: setIsPaintMode,
     isPaintMode: isPaintMode
   }), !isPaintMode.mode && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_View__WEBPACK_IMPORTED_MODULE_2__["View"], {
-    changeMode: changeMode
+    setIsPaintMode: setIsPaintMode,
+    isPaintMode: isPaintMode
   }));
 };
 
@@ -30704,7 +30693,9 @@ var log = function log() {
   (_console = console).log.apply(_console, arguments);
 };
 
-var Paint = function Paint() {
+var Paint = function Paint(_ref) {
+  var setIsPaintMode = _ref.setIsPaintMode,
+      isPaintMode = _ref.isPaintMode;
   var min = 2;
   var max = 15;
   /****************** canvas stuff *********************/
@@ -30776,8 +30767,8 @@ var Paint = function Paint() {
   }, [color, width, image, paintMode]);
   /****************** canvas functions *********************/
 
-  var startDrawing = function startDrawing(_ref) {
-    var nativeEvent = _ref.nativeEvent;
+  var startDrawing = function startDrawing(_ref2) {
+    var nativeEvent = _ref2.nativeEvent;
     var offsetX = nativeEvent.offsetX,
         offsetY = nativeEvent.offsetY;
     contextRef.current.beginPath();
@@ -30792,8 +30783,8 @@ var Paint = function Paint() {
     setImage(canvasRef.current.toDataURL()); // log(image.length)
   };
 
-  var draw = function draw(_ref2) {
-    var nativeEvent = _ref2.nativeEvent;
+  var draw = function draw(_ref3) {
+    var nativeEvent = _ref3.nativeEvent;
     if (!isDrawing) return;
     var offsetX = nativeEvent.offsetX,
         offsetY = nativeEvent.offsetY;
@@ -30865,7 +30856,15 @@ var Paint = function Paint() {
     }
   }, "Clear"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
-    className: "no"
+    className: "no",
+    onClick: function onClick() {
+      var imgId = isPaintMode.imgId,
+          mode = isPaintMode.mode;
+      setIsPaintMode({
+        imgId: imgId,
+        mode: !mode
+      });
+    }
   }, "Cancel")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "canvas"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
@@ -30925,7 +30924,8 @@ var log = function log() {
 };
 
 var View = function View(_ref) {
-  var changeMode = _ref.changeMode;
+  var setIsPaintMode = _ref.setIsPaintMode,
+      isPaintMode = _ref.isPaintMode;
   var ratio = 2; //width/height
 
   var padding = 10; //padding between center and right/left
@@ -30941,57 +30941,57 @@ var View = function View(_ref) {
     centerTop: 0,
     underHeight: 0,
     underWidth: 0,
-    chooseImg: 0,
+    bottomImgIndex: null,
     imgs: null,
-    toRender: null,
-    imgId: null
+    imgIndex: null,
+    imgDB_ID: null
   }),
       _useState2 = _slicedToArray(_useState, 2),
-      centerImg = _useState2[0],
-      setCenterImg = _useState2[1];
+      state = _useState2[0],
+      setState = _useState2[1];
 
   var next = function next() {
     if (!imgs) return;
-    if (centerImg.chooseImg == imgs.length - 1) return;
+    if (state.bottomImgIndex == imgs.length - 1) return;
 
-    var chooseImg = centerImg.chooseImg,
-        rest = _objectWithoutProperties(centerImg, ["chooseImg"]);
+    var bottomImgIndex = state.bottomImgIndex,
+        rest = _objectWithoutProperties(state, ["bottomImgIndex"]);
 
-    var nextImg = chooseImg + 1;
-    log("to next ".concat(nextImg));
-    setCenterImg(_objectSpread({
-      chooseImg: nextImg
+    var nextImg = bottomImgIndex + 1;
+    setState(_objectSpread({
+      bottomImgIndex: nextImg
     }, rest));
   };
 
   var prev = function prev() {
     if (!imgs) return;
-    if (centerImg.chooseImg == 0) return;
+    if (state.bottomImgIndex == 0) return;
 
-    var chooseImg = centerImg.chooseImg,
-        rest = _objectWithoutProperties(centerImg, ["chooseImg"]);
+    var bottomImgIndex = state.bottomImgIndex,
+        rest = _objectWithoutProperties(state, ["bottomImgIndex"]);
 
-    var nextImg = chooseImg - 1;
-    log("to prev ".concat(nextImg));
-    setCenterImg(_objectSpread({
-      chooseImg: nextImg
+    var nextImg = bottomImgIndex - 1;
+    setState(_objectSpread({
+      bottomImgIndex: nextImg
     }, rest));
   };
 
   var renderImg = function renderImg() {
     if (!imgs) return;
 
-    var toRender = centerImg.toRender,
-        rest = _objectWithoutProperties(centerImg, ["toRender"]);
+    var imgIndex = state.imgIndex,
+        imgDB_ID = state.imgDB_ID,
+        rest = _objectWithoutProperties(state, ["imgIndex", "imgDB_ID"]);
 
-    var nextImg = chooseImg;
-    log("render ".concat(toRender));
-    setCenterImg(_objectSpread({
-      toRender: nextImg
+    var nextImg = bottomImgIndex;
+    setState(_objectSpread({
+      imgIndex: nextImg,
+      imgDB_ID: imgs[nextImg].id
     }, rest));
   };
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    isPaintMode;
     var container = containerRef.current;
     var containerWidth = container.clientWidth;
     var containerHeight = container.clientHeight;
@@ -31002,8 +31002,28 @@ var View = function View(_ref) {
       var centerTop = Math.floor((containerHeight - centerHeight) / 2);
       var underHeight = containerHeight - centerHeight;
       var underWidth = underHeight * 2;
-      var toRender = 0;
-      setCenterImg({
+      var index = null;
+
+      if (isPaintMode.imgId) {
+        index = res.data.findIndex(function (img) {
+          // debugger
+          return isPaintMode.imgId === img.id;
+        });
+      }
+
+      var imgIndex;
+
+      if (index !== null) {
+        imgIndex = index;
+      } else {
+        try {
+          imgIndex = res.data.length - 1;
+        } catch (_unused) {
+          imgIndex = 0;
+        }
+      }
+
+      setState({
         centerWidth: centerWidth,
         centerHeight: centerHeight,
         centerStart: centerStart,
@@ -31011,19 +31031,19 @@ var View = function View(_ref) {
         underHeight: underHeight,
         underWidth: underWidth,
         imgs: res.data,
-        //chooseImg: res.data.length-1,
-        chooseImg: 0,
-        toRender: 0,
-        imgId: res.data[toRender].id
+        //bottomImgIndex: res.data.length-1,
+        bottomImgIndex: imgIndex,
+        imgIndex: imgIndex,
+        imgDB_ID: res.data[imgIndex].id
       });
     })["catch"](function (err) {
       log("Error: ".concat(err));
 
-      var centerWidth = centerImg.centerWidth,
-          centerHeight = centerImg.centerHeight,
-          rest = _objectWithoutProperties(centerImg, ["centerWidth", "centerHeight"]);
+      var centerWidth = state.centerWidth,
+          centerHeight = state.centerHeight,
+          rest = _objectWithoutProperties(state, ["centerWidth", "centerHeight"]);
 
-      setCenterImg({
+      setState({
         centerWidth: containerWidth,
         centerHeight: containerHeight,
         rest: rest
@@ -31032,22 +31052,22 @@ var View = function View(_ref) {
     });
   }, []); //calculation stuff
 
-  var imgId = centerImg.imgId,
-      toRender = centerImg.toRender,
-      imgs = centerImg.imgs,
-      chooseImg = centerImg.chooseImg,
-      centerWidth = centerImg.centerWidth,
-      centerHeight = centerImg.centerHeight,
-      centerStart = centerImg.centerStart,
-      centerTop = centerImg.centerTop,
-      underHeight = centerImg.underHeight,
-      underWidth = centerImg.underWidth;
+  var imgDB_ID = state.imgDB_ID,
+      imgIndex = state.imgIndex,
+      imgs = state.imgs,
+      bottomImgIndex = state.bottomImgIndex,
+      centerWidth = state.centerWidth,
+      centerHeight = state.centerHeight,
+      centerStart = state.centerStart,
+      centerTop = state.centerTop,
+      underHeight = state.underHeight,
+      underWidth = state.underWidth;
   var freeSpace = centerWidth / 2 - underWidth / 2 - padding - underHeight / 2;
   var toLeft;
 
   try {
-    toLeft = freeSpace / chooseImg;
-  } catch (_unused) {
+    toLeft = freeSpace / bottomImgIndex;
+  } catch (_unused2) {
     toLeft = 0;
   }
 
@@ -31055,8 +31075,8 @@ var View = function View(_ref) {
 
   try {
     //debugger
-    toRight = freeSpace / (imgs.length - chooseImg + 1); //debugger
-  } catch (_unused2) {
+    toRight = freeSpace / (imgs.length - bottomImgIndex + 1); //debugger
+  } catch (_unused3) {
     toRight = 0;
   }
 
@@ -31067,8 +31087,8 @@ var View = function View(_ref) {
   var indexRight;
 
   try {
-    indexRight = imgs.length - chooseImg - 2; //debugger
-  } catch (_unused3) {
+    indexRight = imgs.length - bottomImgIndex - 2; //debugger
+  } catch (_unused4) {
     indexRight = 0;
   }
 
@@ -31078,15 +31098,23 @@ var View = function View(_ref) {
     ref: containerRef
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     className: "img-center",
-    id: imgId && {
-      imgId: imgId
-    } || -1,
+    id: imgDB_ID && {
+      imgDB_ID: imgDB_ID
+    } || null,
     style: {
       width: "".concat(centerWidth, "px"),
       height: "".concat(centerHeight, "px")
     },
-    src: imgs && imgs[toRender].url || centerWidth && centerHeight && "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight),
-    onClick: changeMode(imgId)
+    src: imgs && imgs[imgIndex].url || centerWidth && centerHeight && "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight),
+    onClick: function onClick() {
+      debugger;
+      var imgId = isPaintMode.imgId,
+          mode = isPaintMode.mode;
+      setIsPaintMode({
+        imgId: imgDB_ID,
+        mode: !mode
+      });
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       top: "".concat(centerHeight, "px")
@@ -31097,7 +31125,7 @@ var View = function View(_ref) {
     var diff = (underWidth - underHeight) / 2;
     var fnx;
 
-    if (index == chooseImg) {
+    if (index == bottomImgIndex) {
       styling.left = "".concat((centerWidth - underWidth) / 2, "px");
       styling.width = "".concat(underWidth, "px");
       styling.height = "".concat(underHeight, "px");
@@ -31106,7 +31134,7 @@ var View = function View(_ref) {
       styling.width = "".concat(underHeight, "px");
       styling.height = "".concat(underHeight / 2, "px");
 
-      if (index < chooseImg) {
+      if (index < bottomImgIndex) {
         styling.transform = 'rotate(-90deg)';
         styling.left = "".concat(-1 * diff / 2 + toLeft * indexLeft++, "px");
         styling.bottom = "".concat(diff / 2, "px");

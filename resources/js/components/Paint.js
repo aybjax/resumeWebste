@@ -7,7 +7,7 @@ const log = (...x) =>
     console.log(...x)
 }
 
-export const Paint = () =>
+export const Paint = ( {setIsPaintMode, isPaintMode} ) =>
 {
     const min = 2
     const max = 15
@@ -136,7 +136,15 @@ export const Paint = () =>
                     setPaintMode(true)
                 } }>Clear
                 </button>
-                <button type="button" className="no">
+                <button type="button" className="no" onClick={ () =>
+                                                    {
+                                                        const {imgId, mode} = isPaintMode
+                                                        setIsPaintMode({
+                                                            imgId,
+                                                            mode: !mode,
+                                                        })
+                                                    }
+                    } >
                     Cancel
                 </button>
             </div>
