@@ -1,11 +1,19 @@
-import React, {useRef, useEffect, useState} from 'react';
+import React, {useRef, useEffect} from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
+import {Toastie} from './Toastie';
 
 
 const log = (...x) =>
 {
     console.log(...x)
+}
+
+
+const Img = () =>
+{
+    <div><img src="images/toasty.jpg"/></div>
 }
 
 export const View = ({setImgState, imgState}) =>
@@ -17,12 +25,13 @@ export const View = ({setImgState, imgState}) =>
     // const [imgs, setImgs] = useState(null)
     const containerRef = useRef(null)
 
-    const next = () =>{
-        
+    const next = (event) =>{
+        {event}
         if(!imgState.imgs) return
         if(imgState.bottomImgIndex === imgState.imgs.length-1) return
         const {bottomImgIndex, ...rest} = imgState
         const nextImg = bottomImgIndex+1
+        event.target.style.transform = 'rotate(90deg)';
         setImgState({
             bottomImgIndex: nextImg,
             ...rest
@@ -30,7 +39,6 @@ export const View = ({setImgState, imgState}) =>
     }
 
     const prev = () =>{
-        
         if(!imgState.imgs) return
         if(imgState.bottomImgIndex == 0) return
         const {bottomImgIndex, ...rest} = imgState
@@ -42,11 +50,8 @@ export const View = ({setImgState, imgState}) =>
     }
 
     const renderImg = () =>{
-        
         if(!imgState.imgs) return
         const {imgIndex, imgId, imgURL, ...rest} = imgState
-        log(imgURL)
-        alert(imgURL)
         const nextImg = imgState.bottomImgIndex
         const imgs = imgState.imgs
         setImgState({
@@ -62,6 +67,10 @@ export const View = ({setImgState, imgState}) =>
         axios.delete(`painting/paint/${imgId}`)
         .then(res => {
             toast.success("Deleted", {autoClose: 1000})
+            if(Math.random() * 10 < 2)
+            {
+                toast(<Toastie/>, {autoClose: 500, position:toast.POSITION.BOTTOM_RIGHT})
+            }
             const {bottomImgIndex, imgSize, imgs, imgIndex, imgId, imgURL, ...rest} = imgState
             setImgState({
                     ...rest,
@@ -123,7 +132,7 @@ export const View = ({setImgState, imgState}) =>
                     imgURL: (res.data.length>0 ? res.data[index].url : `https://via.placeholder.com/${centerWidth}x${centerHeight}`),
                 })
             })
-        .catch( err=>{
+        .catch( err => {
             const {centerWidth, centerHeight, imgURL, mode, ...rest} = imgState
             if(err.response.status === 403)
             {
@@ -187,7 +196,11 @@ export const View = ({setImgState, imgState}) =>
     }
 
     let zInd = 0
-    
+    let animationZIndex = 0
+    let animationDelay = 0
+    const duration = 0.1
+    const aboveDelay = imgs ? duration * imgs.length : 0
+
     return (
         <div className="canvas-container">
             <div className="toolbar">
@@ -211,39 +224,83 @@ export const View = ({setImgState, imgState}) =>
                 }
             </div>
             <div className="galery" ref={containerRef}>
-                <img className="img-center"
-                    id={imgId && {imgId} || "null"}
-                    style={
+                {
+                    imgId &&
+                    <motion.img className="img-center"
+                        initial = {
+                                {
+                                    //animate above
+                                    top : `${1000}px`,
+                                    left : `${1000/2}px`,
+                                    width : `${0}px`,
+                                    height : `${0}px`,
+                                }
+                            }
+                        animate={
+                                {
+                                    top: '0px',
+                                    left: '0px',
+                                    width:`${centerWidth}px`,
+                                    height:`${centerHeight}px`,
+                                }
+                            }
+                        transition={{duration:0.2, delay: aboveDelay}}
+
+                        whileHover={{scale: 1.05, zIndex: 100}}
+                        
+                        id={imgId && {imgId} || "null"}
+                        src={imgURL}
+                        onClick = { () => 
                             {
-                                width:`${centerWidth}px`,
-                                height:`${centerHeight}px`,
+                                const {mode, ...rest} = imgState
+                                setImgState({
+                                    mode: !mode,
+                                    ...rest,
+                                })
+
                             }
                         }
-                    src={imgURL}
-                    onClick = { () => 
-                        {
-                            const {mode, ...rest} = imgState
-                            setImgState({
-                                mode: !mode,
-                                ...rest,
-                            })
-                            
-                        }
-                    }
-                />
+                    />
+
+                    ||
+
+                    <img className="img-center"
+                        style={
+                                {
+                                    width:`${centerWidth}px`,
+                                    height:`${centerHeight}px`,
+                                }
+                            }
+                        
+                        id={imgId && {imgId} || "null"}
+                        src={imgURL}
+                    />
+                }
                 <div style={{top:`${centerHeight}px`}}>
                     {imgs &&           
                                 imgs.map( (item, index) =>
                                 {
+                                    
                                     //styling stuff
                                     const styling = {}
                                     const diff = (underWidth - underHeight)/2
                                     let fnx
+
+                                    const init = {
+                                        left : `${(centerWidth-underWidth)/2}px`,
+                                        width : `${underWidth}px`,
+                                        height : `${underHeight}px`,
+                                        bottom : `${0}px`,
+                                        zIndex: animationZIndex--,
+                                    }
                                     if(index === bottomImgIndex)
                                     {
+                                        styling.transform = 'rotate(0deg)'
                                         styling.left = `${(centerWidth-underWidth)/2}px`
                                         styling.width = `${underWidth}px`
                                         styling.height = `${underHeight}px`
+                                        styling.bottom = `${0}px`
+
                                         fnx = renderImg
                                     }else
                                     {
@@ -255,7 +312,6 @@ export const View = ({setImgState, imgState}) =>
                                             styling.left = `${(-1)*(diff)/2 + toLeft*indexLeft++}px`
                                             styling.bottom = `${(diff)/2}px`
                                             styling.zIndex = `${zInd++}`
-                                            styling.borderBottom = "2px solid red"
                                             fnx = prev
                                         }else
                                         {
@@ -263,14 +319,19 @@ export const View = ({setImgState, imgState}) =>
                                             styling.left = `${centerWidth - underHeight + (diff)/2 - toRight*indexRight--}px`
                                             styling.bottom = `${(diff)/2}px`
                                             styling.zIndex = `${zInd--}`
-                                            styling.borderBottom = "2px solid red"
                                             fnx = next
                                         }
                                     }
+                                    const delay = animationDelay
+                                    animationDelay += duration
                                     //render
                                     return (
-                                        <img className="img-under"
-                                            style={{...styling}}
+                                        <motion.img
+                                            initial={{...init}}
+                                            animate={{...styling}}
+                                            transition={{duration: duration, delay:animationDelay, }}
+                                            
+                                            className="img-under"
                                             id={index}
                                             key={item.id}
                                             src={item.url}

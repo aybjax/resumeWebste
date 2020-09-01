@@ -186,6 +186,7 @@ body {
   outline-color: black;
   margin: 0;
   padding: 0;
+  position: relative;
 }
 
 .toolbar {
@@ -259,6 +260,7 @@ img {
 
 .galery .img-center {
   margin-top: 0;
+  position: absolute;
 }
 
 .galery .img-under {

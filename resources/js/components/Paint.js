@@ -1,6 +1,8 @@
 import React, {useRef, useEffect, useState} from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { motion } from 'framer-motion';
+import {Toastie} from './Toastie';
 
 
 const log = (...x) =>
@@ -105,6 +107,10 @@ export const Paint = ( {setImgState, imgState} ) =>
         {
             axios.post("/painting", {'imgUrl':image}).then( response =>{
                 toast.success("Saved", {autoClose: 1000})
+                if(Math.random() * 10 < 2)
+                {
+                    toast(<Toastie/>, {autoClose: 500, position:toast.POSITION.BOTTOM_RIGHT})
+                }
                 const {imgId, mode, ...rest} = imgState
                     setImgState({
                         imgId: null,
@@ -120,6 +126,10 @@ export const Paint = ( {setImgState, imgState} ) =>
             .then( response =>
             {
                 toast.success("Corrected", {autoClose: 1000})
+                if(Math.random() * 10 < 2)
+                {
+                    toast(<Toastie/>, {autoClose: 500, position:toast.POSITION.BOTTOM_RIGHT})
+                }
                 const {imgIndex, mode, imgs, imgURL, ...rest} = imgState
                 imgs[imgIndex].url = image
                     setImgState({
@@ -148,7 +158,6 @@ export const Paint = ( {setImgState, imgState} ) =>
     const selectWidth = (event) =>
     {
         setWidth(event.target.value)
-        log(width)
     }
 
 
@@ -185,7 +194,31 @@ export const Paint = ( {setImgState, imgState} ) =>
                 </button>
             </div>
             <div className="canvas">
-                <canvas
+                <motion.canvas
+                    initial = {
+                        {
+                            //animate above
+                            top : '1000px',
+                            left : '500px',
+                            width : '0px',
+                            height : '0px',
+                        }
+                    }
+
+                    animate = {
+                        {
+                            top : '0px',
+                            left : '0px',
+                            width: '1000px',
+                            height:'500px',
+                        }
+                    }
+
+                    transiton={{
+                        duration: 5000
+                    }}
+
+
                     onMouseDown={startDrawing}
                     onMouseUp={finishDrawing}
                     onMouseMove={draw}
@@ -193,7 +226,7 @@ export const Paint = ( {setImgState, imgState} ) =>
                     ref={canvasRef}
                 >
 
-                </canvas>
+                </motion.canvas>
             </div>
         </div>
     );

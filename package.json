@@ -26,6 +26,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "framer-motion": "^2.6.5",
         "react-router-dom": "^5.2.0",
         "react-toastify": "^6.0.8",
         "styled-components": "^5.1.1"
