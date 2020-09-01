@@ -20,6 +20,12 @@
 **  notebook
 */
 
+/************************************************************/
+
+/*
+**  painting
+*/
+
 @-webkit-keyframes change-background {
   0% {
     background-color: #000;
@@ -160,17 +166,23 @@
 **  notebook
 */
 
+/************************************************************/
+
+/*
+**  painting
+*/
+
 body {
   height: 100%;
+  background: #6cb2eb url(/images/paint-bg.jpg?ad4b34729acfa986117b2f12ce935cc9) no-repeat center center fixed;
+  background-size: cover;
 }
 
 .canvas-container {
   margin-right: auto;
   margin-left: auto;
   width: 1000px;
-  border: 2px solid black;
-  margin-top: 150px;
-  margin-bottom: 150px;
+  border: 2px solid #9460e2;
   border-radius: 10px;
   padding-left: 15px;
   padding-right: 15px;
@@ -183,10 +195,9 @@ body {
   height: 500px;
   outline-style: solid;
   outline-width: 5px;
-  outline-color: black;
+  outline-color: #9460e2;
   margin: 0;
   padding: 0;
-  position: relative;
 }
 
 .toolbar {
@@ -237,14 +248,11 @@ body {
 img {
   outline-style: solid;
   outline-width: 2px;
-  outline-color: green;
+  outline-color: #9460e2;
+  border-radius: 10px;
 }
 
 .galery-wrapper {
-  margin-top: 150px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 150px;
   width: 1000px;
 }
 
@@ -253,17 +261,22 @@ img {
   padding: 0;
   width: 1000px;
   height: 700px;
-  outline-style: solid;
-  outline-width: 5px;
-  outline-color: black;
 }
 
 .galery .img-center {
   margin-top: 0;
-  position: absolute;
+  position: relative;
 }
 
 .galery .img-under {
   position: absolute;
+}
+
+.galery-wrapper,
+.canvas-container {
+  margin-top: 100px;
+  margin-bottom: 150px;
+  margin-left: auto;
+  margin-right: auto;
 }
 

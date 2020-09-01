@@ -4,12 +4,6 @@ import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import {Toastie} from './Toastie';
 
-
-const log = (...x) =>
-{
-    console.log(...x)
-}
-
 const errorServerSimple = (err) =>
 {
     if(err.response.status === 403)

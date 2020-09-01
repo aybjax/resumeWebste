@@ -44812,12 +44812,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-var log = function log() {
-  var _console;
-
-  (_console = console).log.apply(_console, arguments);
-};
-
 var errorServerSimple = function errorServerSimple(err) {
   if (err.response.status === 403) react_toastify__WEBPACK_IMPORTED_MODULE_2__["toast"].info("You need to log in to save drawing", {
     position: react_toastify__WEBPACK_IMPORTED_MODULE_2__["toast"].POSITION.TOP_CENTER,
@@ -45131,20 +45125,6 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
-
-var log = function log() {
-  var _console;
-
-  (_console = console).log.apply(_console, arguments);
-};
-
-var Img = function Img() {
-  /*#__PURE__*/
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "images/toasty.jpg"
-  }));
-};
-
 var View = function View(_ref) {
   var setImgState = _ref.setImgState,
       imgState = _ref.imgState;
@@ -45381,25 +45361,27 @@ var View = function View(_ref) {
   }, "Delete it")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "galery",
     ref: containerRef
-  }, imgId && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].img, {
-    className: "img-center",
-    initial: {
-      //animate above
-      top: "".concat(1000, "px"),
-      left: "".concat(1000 / 2, "px"),
-      width: "".concat(0, "px"),
-      height: "".concat(0, "px")
-    },
-    animate: {
-      top: '0px',
-      left: '0px',
+  },
+  /*#__PURE__*/
+  // imgId &&
+  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].img, {
+    className: "img-center" // initial = {
+    //         {
+    //             //animate above
+    //             top : `${1000}px`,
+    //             left : `${1000/2}px`,
+    //             width : `${0}px`,
+    //             height : `${0}px`,
+    //         }
+    //     }
+    ,
+    style: {
+      // top: '0px',
+      // left: '0px',
       width: "".concat(centerWidth, "px"),
       height: "".concat(centerHeight, "px")
-    },
-    transition: {
-      duration: 0.2,
-      delay: aboveDelay
-    },
+    } // transition={{duration:0.2, delay: aboveDelay}}
+    ,
     whileHover: {
       scale: 1.05,
       zIndex: 100
@@ -45416,17 +45398,18 @@ var View = function View(_ref) {
         mode: !mode
       }, rest));
     }
-  }) || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "img-center",
-    style: {
-      width: "".concat(centerWidth, "px"),
-      height: "".concat(centerHeight, "px")
-    },
-    id: imgId && {
-      imgId: imgId
-    } || "null",
-    src: imgURL
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }) // ||
+  // <img className="img-center"
+  //     style={
+  //             {
+  //                 width:`${centerWidth}px`,
+  //                 height:`${centerHeight}px`,
+  //             }
+  //         }
+  //     id={imgId && {imgId} || "null"}
+  //     src={imgURL}
+  // />
+  , /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       top: "".concat(centerHeight, "px")
     }
@@ -45477,7 +45460,11 @@ var View = function View(_ref) {
       animate: _objectSpread({}, styling),
       transition: {
         duration: duration,
-        delay: animationDelay
+        delay: animationDelay // transform:{duration: duration, delay:animationDelay},
+        // left:{duration: duration, delay:animationDelay},
+        // bottom:{duration: duration, delay:animationDelay},
+        // zIndex:{duration: duration/2, delay:animationDelay},
+
       },
       className: "img-under",
       id: index,

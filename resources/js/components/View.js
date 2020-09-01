@@ -4,18 +4,6 @@ import { toast } from 'react-toastify';
 import { motion } from 'framer-motion';
 import {Toastie} from './Toastie';
 
-
-const log = (...x) =>
-{
-    console.log(...x)
-}
-
-
-const Img = () =>
-{
-    <div><img src="images/toasty.jpg"/></div>
-}
-
 export const View = ({setImgState, imgState}) =>
 {
     const ratio = 2 //width/height
@@ -225,26 +213,26 @@ export const View = ({setImgState, imgState}) =>
             </div>
             <div className="galery" ref={containerRef}>
                 {
-                    imgId &&
+                    // imgId &&
                     <motion.img className="img-center"
-                        initial = {
+                        // initial = {
+                        //         {
+                        //             //animate above
+                        //             top : `${1000}px`,
+                        //             left : `${1000/2}px`,
+                        //             width : `${0}px`,
+                        //             height : `${0}px`,
+                        //         }
+                        //     }
+                        style={
                                 {
-                                    //animate above
-                                    top : `${1000}px`,
-                                    left : `${1000/2}px`,
-                                    width : `${0}px`,
-                                    height : `${0}px`,
-                                }
-                            }
-                        animate={
-                                {
-                                    top: '0px',
-                                    left: '0px',
+                                    // top: '0px',
+                                    // left: '0px',
                                     width:`${centerWidth}px`,
                                     height:`${centerHeight}px`,
                                 }
                             }
-                        transition={{duration:0.2, delay: aboveDelay}}
+                        // transition={{duration:0.2, delay: aboveDelay}}
 
                         whileHover={{scale: 1.05, zIndex: 100}}
                         
@@ -262,19 +250,19 @@ export const View = ({setImgState, imgState}) =>
                         }
                     />
 
-                    ||
+                    // ||
 
-                    <img className="img-center"
-                        style={
-                                {
-                                    width:`${centerWidth}px`,
-                                    height:`${centerHeight}px`,
-                                }
-                            }
+                    // <img className="img-center"
+                    //     style={
+                    //             {
+                    //                 width:`${centerWidth}px`,
+                    //                 height:`${centerHeight}px`,
+                    //             }
+                    //         }
                         
-                        id={imgId && {imgId} || "null"}
-                        src={imgURL}
-                    />
+                    //     id={imgId && {imgId} || "null"}
+                    //     src={imgURL}
+                    // />
                 }
                 <div style={{top:`${centerHeight}px`}}>
                     {imgs &&           
@@ -329,7 +317,12 @@ export const View = ({setImgState, imgState}) =>
                                         <motion.img
                                             initial={{...init}}
                                             animate={{...styling}}
-                                            transition={{duration: duration, delay:animationDelay, }}
+                                            transition={{duration: duration, delay:animationDelay
+                                                // transform:{duration: duration, delay:animationDelay},
+                                                // left:{duration: duration, delay:animationDelay},
+                                                // bottom:{duration: duration, delay:animationDelay},
+                                                // zIndex:{duration: duration/2, delay:animationDelay},
+                                            }}
                                             
                                             className="img-under"
                                             id={index}
