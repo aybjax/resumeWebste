@@ -45257,7 +45257,7 @@ var View = function View(_ref) {
         imgIndex: index,
         imgId: res.data.length > 0 ? res.data[index].id : null,
         imgSize: imgSize,
-        imgURL: res.data.length > 0 ? res.data[index].url : "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight)
+        imgURL: res.data.length > 0 ? res.data[index].url : null
       });
     })["catch"](function (err) {
       var centerWidth = imgState.centerWidth,
@@ -45285,7 +45285,7 @@ var View = function View(_ref) {
         setImgState(_objectSpread({
           centerWidth: containerRef.current.clientWidth,
           centerHeight: containerRef.current.clientHeight,
-          imgURL: "https://via.placeholder.com/".concat(containerRef.current.clientWidth, "x").concat(containerRef.current.clientHeight),
+          imgURL: null,
           mode: mode
         }, rest));
       }
@@ -45361,10 +45361,7 @@ var View = function View(_ref) {
   }, "Delete it")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "galery",
     ref: containerRef
-  },
-  /*#__PURE__*/
-  // imgId &&
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].img, {
+  }, imgURL && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(framer_motion__WEBPACK_IMPORTED_MODULE_3__["motion"].img, {
     className: "img-center" // initial = {
     //         {
     //             //animate above
@@ -45398,18 +45395,17 @@ var View = function View(_ref) {
         mode: !mode
       }, rest));
     }
-  }) // ||
-  // <img className="img-center"
-  //     style={
-  //             {
-  //                 width:`${centerWidth}px`,
-  //                 height:`${centerHeight}px`,
-  //             }
-  //         }
-  //     id={imgId && {imgId} || "null"}
-  //     src={imgURL}
-  // />
-  , /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }) || /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "img-center",
+    style: {
+      width: "".concat(centerWidth, "px"),
+      height: "".concat(centerHeight, "px")
+    },
+    id: imgId && {
+      imgId: imgId
+    } || "null",
+    src: "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       top: "".concat(centerHeight, "px")
     }

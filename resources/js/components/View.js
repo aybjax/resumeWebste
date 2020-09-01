@@ -117,7 +117,7 @@ export const View = ({setImgState, imgState}) =>
                     imgIndex: index,
                     imgId: (res.data.length>0 ? res.data[index].id : null),
                     imgSize: imgSize,
-                    imgURL: (res.data.length>0 ? res.data[index].url : `https://via.placeholder.com/${centerWidth}x${centerHeight}`),
+                    imgURL: (res.data.length>0 ? res.data[index].url : null),
                 })
             })
         .catch( err => {
@@ -142,7 +142,7 @@ export const View = ({setImgState, imgState}) =>
                 setImgState({
                     centerWidth: containerRef.current.clientWidth,
                     centerHeight: containerRef.current.clientHeight,
-                    imgURL: `https://via.placeholder.com/${containerRef.current.clientWidth}x${containerRef.current.clientHeight}`,
+                    imgURL: null,
                     mode,
                     ...rest,
                 })
@@ -213,7 +213,7 @@ export const View = ({setImgState, imgState}) =>
             </div>
             <div className="galery" ref={containerRef}>
                 {
-                    // imgId &&
+                    imgURL &&
                     <motion.img className="img-center"
                         // initial = {
                         //         {
@@ -248,21 +248,19 @@ export const View = ({setImgState, imgState}) =>
 
                             }
                         }
-                    />
+                    /> ||                    
 
-                    // ||
-
-                    // <img className="img-center"
-                    //     style={
-                    //             {
-                    //                 width:`${centerWidth}px`,
-                    //                 height:`${centerHeight}px`,
-                    //             }
-                    //         }
+                    <img className="img-center"
+                        style={
+                                {
+                                    width:`${centerWidth}px`,
+                                    height:`${centerHeight}px`,
+                                }
+                            }
                         
-                    //     id={imgId && {imgId} || "null"}
-                    //     src={imgURL}
-                    // />
+                        id={"null"}
+                        src={`https://via.placeholder.com/${centerWidth}x${centerHeight}`}
+                    />
                 }
                 <div style={{top:`${centerHeight}px`}}>
                     {imgs &&           

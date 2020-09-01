@@ -55,7 +55,7 @@ i[class ^= "ion-"]
     padding: $padding;
     background:
     {
-        color: $icon-color;
+        color: $navbar-color;
     }
     margin:
     {
@@ -153,7 +153,7 @@ table tr td
 .progress {
     height: 100%;
     margin-left: 0px;
-    width: 70%;
+    // width: 70%;
     animation-name: progress-animate;
     animation-duration: 2s;
     animation-iteration-count: infinite;
