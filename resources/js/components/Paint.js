@@ -1,10 +1,23 @@
 import React, {useRef, useEffect, useState} from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const log = (...x) =>
 {
     console.log(...x)
+}
+
+const errorServerSimple = (err) =>
+{
+    if(err.response.status === 403)
+        toast.info("You need to log in to save drawing",
+            {position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000})
+    else
+        toast.error("Server error",
+            {position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000})
 }
 
 export const Paint = ( {setImgState, imgState} ) =>
@@ -88,12 +101,10 @@ export const Paint = ( {setImgState, imgState} ) =>
 
     const saveImage = (image) => () =>
     {
-        debugger
         if(imgState.imgId === null)
         {
             axios.post("/painting", {'imgUrl':image}).then( response =>{
-                alert("saved")
-                log(response)
+                toast.success("Saved", {autoClose: 1000})
                 const {imgId, mode, ...rest} = imgState
                     setImgState({
                         imgId: null,
@@ -101,16 +112,14 @@ export const Paint = ( {setImgState, imgState} ) =>
                         ...rest,
                     })
             } ).catch( err => {
-                if(err.response.status === 403)
-                    alert("login to save")
-                else
-                    alert(`status ${err.response.status}`)
+                errorServerSimple(err)
             } )
         }else
         {
-            axios.patch(`/painting/paint/${imgState.imgId}`, {'imgUrl':image}).then( response =>{
-                alert("patched")
-                log(response)
+            axios.patch(`/painting/paint/${imgState.imgId}`, {'imgUrl':image})
+            .then( response =>
+            {
+                toast.success("Corrected", {autoClose: 1000})
                 const {imgIndex, mode, imgs, imgURL, ...rest} = imgState
                 imgs[imgIndex].url = image
                     setImgState({
@@ -120,14 +129,13 @@ export const Paint = ( {setImgState, imgState} ) =>
                         imgURL: image,
                         ...rest,
                     })
-            } ).catch( err => {
-                if(err.response.status === 403)
-                    alert("login to save")
-                else
-                    alert(`status ${err.response.status}`)
+            } )
+            .catch( err => {
+                    errorServerSimple(err)
             } )
         }
     }
+
 
     /****************** input color functions *********************/
 

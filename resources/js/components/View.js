@@ -1,5 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 const log = (...x) =>
@@ -60,32 +61,7 @@ export const View = ({setImgState, imgState}) =>
         const {imgId, ...rest} = imgState
         axios.delete(`painting/paint/${imgId}`)
         .then(res => {
-            alert("deleted")
-            // const {bottomImgIndex, imgSize, imgs, imgIndex, imgId, imgURL, ...rest} = imgState
-
-            // imgs.splice(imgIndex, 1)
-            // let newSize = imgs.length - 1
-            // let newIndex = imgIndex
-
-            // if(newSize < 0)
-            // {
-            //     newIndex = null
-            //     newSize = null
-            // }else if(newIndex>newSize)
-            // {
-            //     newIndex = newSize
-            // }
-            
-            // setImgState({
-            //     ...rest,
-            //     bottomImgIndex:newIndex,
-            //     imgs: imgs,
-            //     imgIndex:newIndex,
-            //     imgId: newIndex ? imgs[newIndex].id : null,
-            //     imgSize: newSize,
-            //     imgURL: newIndex ? imgs[newIndex].url : null
-            // })
-
+            toast.success("Deleted", {autoClose: 1000})
             const {bottomImgIndex, imgSize, imgs, imgIndex, imgId, imgURL, ...rest} = imgState
             setImgState({
                     ...rest,
@@ -98,8 +74,7 @@ export const View = ({setImgState, imgState}) =>
                 })
         })
         .catch(err => {
-            alert(err)
-            log(err.message)
+            toast.error("Server error", {position: toast.POSITION.TOP_CENTER, autoClose: 2000})
         })
 
     }
@@ -132,13 +107,7 @@ export const View = ({setImgState, imgState}) =>
                 {
                     index = imgSize
                 }
-
-
-                if(res.data.length>0)
-                {
-                    log(res.data)
-                    log(index)
-                }
+                
                 setImgState({
                     centerWidth: centerWidth,
                     centerHeight: centerHeight,
@@ -155,18 +124,34 @@ export const View = ({setImgState, imgState}) =>
                 })
             })
         .catch( err=>{
-            log(`Error: ${err}`)
-            const {centerWidth, centerHeight, imgURL, ...rest} = imgState
-            setImgState({
-                centerWidth: containerWidth,
-                centerHeight: containerHeight,
-                imgURL: `https://via.placeholder.com/${centerWidth}x${centerHeight}`,
-                ...rest,
-            })
-            alert('axios error')
+            const {centerWidth, centerHeight, imgURL, mode, ...rest} = imgState
+            if(err.response.status === 403)
+            {
+                toast.info("You need to log in to save drawing",
+                        {position: toast.POSITION.TOP_CENTER,
+                        autoClose: 2000})
+                setImgState({
+                    centerWidth: containerRef.current.clientWidth,
+                    centerHeight: containerRef.current.clientHeight,
+                    imgURL: null,
+                    mode: !mode,
+                    ...rest,
+                })
+            }else
+            {
+                toast.error("Server error",
+                        {position: toast.POSITION.TOP_CENTER,
+                        autoClose: 2000})
+                setImgState({
+                    centerWidth: containerRef.current.clientWidth,
+                    centerHeight: containerRef.current.clientHeight,
+                    imgURL: `https://via.placeholder.com/${containerRef.current.clientWidth}x${containerRef.current.clientHeight}`,
+                    mode,
+                    ...rest,
+                })
+            }
         } )
     }, [imgState.imgSize])
-
 
     //calculation stuff
     const {imgId, imgIndex, imgURL, imgs, bottomImgIndex, centerWidth, centerHeight, underHeight, underWidth} = imgState;
@@ -219,9 +204,11 @@ export const View = ({setImgState, imgState}) =>
                     Create new
                 </button>
 
-                <button type="button" className="no" onClick={deleteImg}>
-                    Delete it
-                </button>
+                {imgId != null &&
+                    <button type="button" className="no" onClick={deleteImg}>
+                        Delete it
+                    </button>
+                }
             </div>
             <div className="galery" ref={containerRef}>
                 <img className="img-center"
