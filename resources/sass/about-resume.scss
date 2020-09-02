@@ -1,3 +1,4 @@
+
 @import "resources/variables";
 @import "resources/mixins";
 
@@ -64,6 +65,8 @@ body {
     max-width: $box-width;
     height: $content-height;
     padding: $content-padding;
+
+    overflow-x: hidden;
 
     margin-bottom: $space-column;
 
@@ -140,39 +143,6 @@ body {
     }
 }
 
-.flex-wrapper:hover .content-wrapper
-{
-    & .content
-    {
-        transition: all 1s ease-in;
-        opacity: 0.5;
-    }
-
-    &:hover .content
-    {
-        transition: all 1s ease-in-out;
-        max-width: number-percent($container-width);
-        width: number-percent($container-width);
-        height: $content-enlarged-height;
-        margin-right: auto;
-        margin-left: auto;
-
-        position: sticky;
-        top: 500px;
-
-        font:
-        {
-            size: $hover-font-size;
-        }
-        opacity: 1;
-
-        &::after, &::before
-        {
-            display: none;
-        }
-    }
-}
-
 
 .frame-window {
     @include center-horizontal;
@@ -221,4 +191,94 @@ a:not(.navbar-a) {
      &:hover {
          cursor: pointer;
      }
+ }
+
+
+
+ @media(max-width: 1065px){
+    .content::before, .content::after, .flex-wrapper::before {
+        display: none;
+    }
+ }
+
+
+
+ @media(min-width: 990px){
+
+    .flex-wrapper:hover .content-wrapper
+    {
+        & .content
+        {
+            transition: all 1s ease-in;
+            opacity: 0.5;
+            overflow-x: hidden;
+        }
+    
+        &:hover .content
+        {
+            transition: all 1s ease-in-out;
+            max-width: number-percent($container-width);
+            width: number-percent($container-width);
+            height: $content-enlarged-height;
+            margin-right: auto;
+            margin-left: auto;
+
+            overflow-x: scroll;
+    
+            position: sticky;
+            top: 500px;
+    
+            font:
+            {
+                size: $hover-font-size;
+            }
+            opacity: 1;
+    
+            &::after, &::before
+            {
+                display: none;
+            }
+        }
+    }
+ }
+
+
+
+ @media(min-width:620px) and (max-width: 989px){
+
+    .flex-wrapper:hover .content-wrapper
+    {
+        & .content
+        {
+            transition: all 1s ease-in;
+            opacity: 0.5;
+            overflow-x: hidden;
+        }
+    
+        &:hover .content
+        {
+            transition: all 1s ease-in-out;
+            max-width: 100%;
+            width: 100%;
+            height: $content-enlarged-height;
+            margin-right: auto;
+            margin-left: auto;
+
+            overflow-x: scroll;
+    
+            position: sticky;
+            top: 500px;
+    
+            font:
+            {
+                size: $hover-font-size;
+            }
+            opacity: 1;
+    
+            &::after, &::before
+            {
+                display: none;
+            }
+        }
+    }
  }

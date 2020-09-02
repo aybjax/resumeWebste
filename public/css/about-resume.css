@@ -324,6 +324,38 @@ table tr td {
           animation-timing-function: linear;
 }
 
+@media (max-width: 1065px) {
+  .flex-sides {
+    flex-flow: column;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
+
+  .container .grid-sides {
+    display: block;
+  }
+
+  .container .grid-sides .grid-table {
+    display: table;
+    width: 100%;
+  }
+
+  .container .grid-sides .grid-table tr td {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .container .grid-sides .img-container {
+    display: none;
+  }
+}
+
 /*
 ** small projects part
 */
@@ -362,6 +394,7 @@ table tr td {
   max-width: 429.75px;
   height: 400px;
   padding: 15px;
+  overflow-x: hidden;
   margin-bottom: 10px;
 }
 
@@ -427,30 +460,6 @@ table tr td {
   margin-bottom: 75px;
 }
 
-.flex-wrapper:hover .content-wrapper .content {
-  transition: all 1s ease-in;
-  opacity: 0.5;
-}
-
-.flex-wrapper:hover .content-wrapper:hover .content {
-  transition: all 1s ease-in-out;
-  max-width: 900px;
-  width: 900px;
-  height: 480px;
-  margin-right: auto;
-  margin-left: auto;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 500px;
-  font-size: 25px;
-  opacity: 1;
-}
-
-.flex-wrapper:hover .content-wrapper:hover .content::after,
-.flex-wrapper:hover .content-wrapper:hover .content::before {
-  display: none;
-}
-
 .frame-window {
   margin-right: auto;
   margin-left: auto;
@@ -498,5 +507,69 @@ a:not(.navbar-a)::hover {
 
 .just-hover:hover {
   cursor: pointer;
+}
+
+@media (max-width: 1065px) {
+  .content::before,
+  .content::after,
+  .flex-wrapper::before {
+    display: none;
+  }
+}
+
+@media (min-width: 990px) {
+  .flex-wrapper:hover .content-wrapper .content {
+    transition: all 1s ease-in;
+    opacity: 0.5;
+    overflow-x: hidden;
+  }
+
+  .flex-wrapper:hover .content-wrapper:hover .content {
+    transition: all 1s ease-in-out;
+    max-width: 900px;
+    width: 900px;
+    height: 480px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-x: scroll;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 500px;
+    font-size: 25px;
+    opacity: 1;
+  }
+
+  .flex-wrapper:hover .content-wrapper:hover .content::after,
+  .flex-wrapper:hover .content-wrapper:hover .content::before {
+    display: none;
+  }
+}
+
+@media (min-width: 620px) and (max-width: 989px) {
+  .flex-wrapper:hover .content-wrapper .content {
+    transition: all 1s ease-in;
+    opacity: 0.5;
+    overflow-x: hidden;
+  }
+
+  .flex-wrapper:hover .content-wrapper:hover .content {
+    transition: all 1s ease-in-out;
+    max-width: 100%;
+    width: 100%;
+    height: 480px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow-x: scroll;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 500px;
+    font-size: 25px;
+    opacity: 1;
+  }
+
+  .flex-wrapper:hover .content-wrapper:hover .content::after,
+  .flex-wrapper:hover .content-wrapper:hover .content::before {
+    display: none;
+  }
 }
 

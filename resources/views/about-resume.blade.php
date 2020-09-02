@@ -98,112 +98,128 @@
     <div class="flex-wrapper">
 
         <div class="content-wrapper">
-        <a target="_blank" href="{{route('painting')}}">
-            <div class="content">
-                <h2>Веб приложение Reactjs, html/php, scss</h2>
-                <p>
-                    Приложение для рисования. Можно сохранять на базе данных MySQL через Laravel в качестве backend приложения. 
-                    для этого спользуется библиотека axios для GET, PUT, PATCH, DELETE методов HTTP, без использования Cross-origin resource sharing.
-                </p>
-                <p>
-                    Не использовался Redux, а информация сохроняется в state хуке.
-                </p>
-                <p>
-                    Анимация проихведена при помощи библиотеки framer motion.
-                </p>
+            <a target="_blank" href="{{route('painting')}}">
+                <div class="content">
+                    <h2>Веб приложение Reactjs, html/php, scss</h2>
+                    <p>
+                        Приложение для рисования. Можно сохранять на базе данных MySQL через Laravel в качестве backend приложения. 
+                        для этого спользуется библиотека axios для GET, PUT, PATCH, DELETE методов HTTP, без использования Cross-origin resource sharing.
+                    </p>
+                    <p>
+                        Не использовался Redux, а информация сохроняется в state хуке.
+                    </p>
+                    <p>
+                        Анимация проихведена при помощи библиотеки framer motion.
+                    </p>
 
-                <p>
-                    Pop-up сообщения произведены при помощи библиотеки react-toastify
-                </p>
-            </div>
-        </a>
+                    <p>
+                        Pop-up сообщения произведены при помощи библиотеки react-toastify
+                    </p>
+                </div>
+            </a>
         </div>
         <div class="content-wrapper">
-        <a target="_blank" href="{{route('notebooks.index')}}">
-            <div class="content">
-                <h2>Веб приложение на php Laravel, Eloquent, scss</h2>
-                <p>
-                    Приложение для записи. Можно сохранять на базе данных при помоци Eloquent.
-                </p>
-                <p>
-                    Генерирование, сохранение и удаление произведена без помощи Javascript. Использовалась только формы фреймворка Laravel.
-                </p>
-                <p>
-                    Анимация проихведена при помощи scss.
-                </p>
-            </div>
-        </a>
+            <a target="_blank" href="{{route('notebooks.index')}}">
+                <div class="content">
+                    <h2>Веб приложение на php Laravel, Eloquent, scss</h2>
+                    <p>
+                        Приложение для записи. Можно сохранять на базе данных при помоци Eloquent.
+                    </p>
+                    <p>
+                        Генерирование, сохранение и удаление произведена без помощи Javascript. Использовалась только формы фреймворка Laravel.
+                    </p>
+                    <p>
+                        Анимация проихведена при помощи scss.
+                    </p>
+                </div>
+            </a>
         </div>
         <div class="content-wrapper">
-        <a target="_blank" href="http://aybat.host20.uk/webSites/notes/">
-            <div class="content">
-                <h2>Веб приложение на php, jQuery, ajax, Bootstrap</h2>
-                <p>
-                    Приложение для записи. Можно сохранять на базе данных при помоци mysqli. 
-                    Приложение написано на процедурном php. При регистрации отправляется э-письмо для активизации. 
-                </p>
-                <p>
-                    Функциональность записей произведена при помощи jQuery и Javascript для обработки и ajax обмена данных,
-                     и процедурном php для сохранения и получения данных с базы данных. 
-                </p>
-                <p>
-                    Оформлена при помощи css и Bootstrap
-                </p>
-            </div>
-        </a>
+            <a target="_blank" href="http://aybat.host20.uk/webSites/notes/">
+                <div class="content">
+                    <h2>Веб приложение на php, jQuery, ajax, Bootstrap</h2>
+                    <p>
+                        Приложение для записи. Можно сохранять на базе данных при помоци mysqli. 
+                        Приложение написано на процедурном php. При регистрации отправляется э-письмо для активизации. 
+                    </p>
+                    <p>
+                        Функциональность записей произведена при помощи jQuery и Javascript для обработки и ajax обмена данных,
+                         и процедурном php для сохранения и получения данных с базы данных. 
+                    </p>
+                    <p>
+                        Оформлена при помощи css и Bootstrap
+                    </p>
+                </div>
+            </a>
         </div>
         <div class="content-wrapper">
-        <a target="_blank" href="#">
-            <div class="content">
-                <h2>Другие проекты</h2>
+            <a target="_blank" href="#">
+                <div class="content">
+                    <h2>Другие проекты</h2>
                     <h4>
                         <a target="_blank" href="https://file-explorer-aybjax.herokuapp.com/">
                             Файловый браузер
                         </a>
                     </h4>
-
+                    <p>
+                        Приложение На Nodejs в сервере Heroku
+                    </p>
+                    <h4>
+                        <a target="_blank" href="https://github.com/aybjax/qwant_kz">
+                            Программы на С 
+                        </a>
+                    </h4>
+                    <p>
+                        Проекты выполненные на программе QwantKz в содействии Qwasar
+                    </p>
+                    <h4>
+                        <a target="_blank" href="https://github.com/aybjax/">
+                            Программы на Golang и Java и т.д.
+                        </a>
+                    </h4>
+                    <p>
+                        Маленкие программы по биоинформатике и простые программы сделанные во время изучения в платформах Udemy и Coursera
+                    </p>
                     <h4>
                         <a target="_blank" href="http://aybat.host20.uk/webSites/fruitJQ/">
                             Fruit ninja 
                         </a>
                     </h4>
-
                     <h4>
                         <a target="_blank" href="http://aybat.host20.uk/webSites/stopwatch/">
                             Секундомер
                         </a>
                     </h4>
-
                     <h4>
                         <a target="_blank" href="http://aybat.host20.uk/webSites/mathJS/">
                             Math Game
                         </a>
                     </h4>
-            </div>
-        </a>
+                </div>
+            </a>
         </div>
         <div class="content-wrapper">
-        <a class="just-hover">
-            <div class="content">
-                <h2> Дипломный проект на Python </h2>
-                <p>
-                    Обучение искусственного интеллекта на модификацию лекарственных веществ.
-                </p>
+            <a class="just-hover">
+                <div class="content">
+                    <h2> Дипломный проект на Python </h2>
+                    <p>
+                        Обучение искусственного интеллекта на модификацию лекарственных веществ.
+                    </p>
 
-                <p>
-                    Для этого использовалась NEAT - NeuroEvolution of Augmenting Topologies
-                </p>
-                <p>
-                    Оценка при помощи алгоритма Random Forest
-                </p>
-                <p>
-                    Автоматизация молекулярного докинга и оценки молекулярных взаимодействии
-                </p>
-                <p>
-                    Статистический анализ используя библиотеки pandas и sklearn
-                </p>
-            </div>
-        </a>
+                    <p>
+                        Для этого использовалась NEAT - NeuroEvolution of Augmenting Topologies
+                    </p>
+                    <p>
+                        Оценка при помощи алгоритма Random Forest
+                    </p>
+                    <p>
+                        Автоматизация молекулярного докинга и оценки молекулярных взаимодействии
+                    </p>
+                    <p>
+                        Статистический анализ используя библиотеки pandas и sklearn
+                    </p>
+                </div>
+            </a>
         </div>
     </div>
 

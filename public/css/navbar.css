@@ -214,3 +214,23 @@ ul.navbar-list li .right-edge {
   font-weight: bold;
 }
 
+@media (max-width: 440px) {
+  ul.navbar-list {
+    flex-flow: column;
+  }
+
+  ul.navbar-list li {
+    display: block;
+    width: 100%;
+  }
+
+  ul.navbar-list .navbar-a:not(.active-navbar) {
+    display: none;
+    position: relative;
+  }
+
+  ul.navbar-list:hover .navbar-a:not(.active-navbar) {
+    display: flex;
+  }
+}
+

@@ -79,3 +79,34 @@ ul.navbar-list li .right-edge {
         weight: bold;
     }
 }
+
+
+@media(max-width: 440px)
+{
+    ul.navbar-list {
+        // 
+
+        // & .navbar-a {
+        //     position: relative;
+        // }
+
+        // &:hover {
+        //     display: block;
+        // }
+        flex-flow: column;
+
+        li {
+            display: block;
+            width: 100%;
+        }
+
+        & .navbar-a:not(.active-navbar) {
+            display: none;
+            position: relative;
+        }
+
+        &:hover .navbar-a:not(.active-navbar){
+            display: flex;
+        }
+    }
+}

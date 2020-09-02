@@ -144,6 +144,8 @@ table tr td
 }
 
 
+//////////////////////////////////////////////
+
 .empty-bar {
     height: 4px;
     width: 100%;
@@ -159,4 +161,41 @@ table tr td
     animation-iteration-count: infinite;
     animation-direction: alternate;
     animation-timing-function: linear;
+}
+
+
+
+
+@media(max-width: 1065px){
+    .flex-sides {
+        flex-flow: column;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .container
+    {
+        margin: {
+            left: auto;
+            right: auto;
+        }
+        width: 90%;
+        .grid-sides {
+            display: block;
+    
+            .grid-table {
+                display: table;
+                width: 100%;
+                tr td {
+                    margin: {
+                        left: auto;
+                        right: auto;
+                    }
+                }
+            }
+    
+            .img-container {
+                display: none;
+            }
+        }
+    }
 }
