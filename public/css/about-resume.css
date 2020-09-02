@@ -394,7 +394,7 @@ table tr td {
   max-width: 429.75px;
   height: 400px;
   padding: 15px;
-  overflow-x: hidden;
+  overflow-x: visible;
   margin-bottom: 10px;
 }
 
@@ -521,7 +521,7 @@ a:not(.navbar-a)::hover {
   .flex-wrapper:hover .content-wrapper .content {
     transition: all 1s ease-in;
     opacity: 0.5;
-    overflow-x: hidden;
+    overflow-x: visible;
   }
 
   .flex-wrapper:hover .content-wrapper:hover .content {
@@ -549,7 +549,7 @@ a:not(.navbar-a)::hover {
   .flex-wrapper:hover .content-wrapper .content {
     transition: all 1s ease-in;
     opacity: 0.5;
-    overflow-x: hidden;
+    overflow-x: visible;
   }
 
   .flex-wrapper:hover .content-wrapper:hover .content {
@@ -571,5 +571,9 @@ a:not(.navbar-a)::hover {
   .flex-wrapper:hover .content-wrapper:hover .content::before {
     display: none;
   }
+}
+
+.inline-block {
+  display: inline-block;
 }
 

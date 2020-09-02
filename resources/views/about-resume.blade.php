@@ -31,7 +31,7 @@
 <div class="container sticky-top container-bg">
     <div class="grid-sides">
         <div class="img-container">
-            <img src="media/Aibat_Zhakeyev.jpg" />
+            <img src="media/Aibat_Zhakeyev.jpg" alt="my-photo" />
         </div>
         <table class="grid-table">
             <tr>
@@ -180,17 +180,17 @@
                     <p>
                         Маленкие программы по биоинформатике и простые программы сделанные во время изучения в платформах Udemy и Coursera
                     </p>
-                    <h4>
+                    <h4 class="inline-block">
                         <a target="_blank" href="http://aybat.host20.uk/webSites/fruitJQ/">
                             Fruit ninja 
                         </a>
                     </h4>
-                    <h4>
+                    <h4 class="inline-block">
                         <a target="_blank" href="http://aybat.host20.uk/webSites/stopwatch/">
                             Секундомер
                         </a>
                     </h4>
-                    <h4>
+                    <h4 class="inline-block">
                         <a target="_blank" href="http://aybat.host20.uk/webSites/mathJS/">
                             Math Game
                         </a>
