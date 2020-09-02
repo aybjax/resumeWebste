@@ -173,7 +173,7 @@
 */
 
 body {
-  background: #6cb2eb url(/images/paint-bg.jpg?ad4b34729acfa986117b2f12ce935cc9) no-repeat center center fixed;
+  background: #6cb2eb url("/images/paint-bg.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
@@ -273,9 +273,15 @@ img {
 
 .galery-wrapper,
 .canvas-container {
-  margin-top: 100px;
-  margin-bottom: 75px;
+  margin-top: 75px;
+  margin-bottom: 100px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.margin {
+  margin-top: 30px;
+  position: relative;
+  color: transparent;
 }
 

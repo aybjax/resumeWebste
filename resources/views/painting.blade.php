@@ -5,6 +5,11 @@
 
 @section("base.content")
 <div id="painting"></div>
+
+<div class="margin">
+    Your add could have been here
+</div>
+
 @endsection("base.content")
 
 

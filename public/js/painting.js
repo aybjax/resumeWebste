@@ -44924,7 +44924,7 @@ var Paint = function Paint(_ref) {
   var saveImage = function saveImage(image) {
     return function () {
       if (imgState.imgId === null) {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/painting", {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("painting", {
           'imgUrl': image
         }).then(function (response) {
           react_toastify__WEBPACK_IMPORTED_MODULE_2__["toast"].success("Saved", {
@@ -44950,7 +44950,7 @@ var Paint = function Paint(_ref) {
           errorServerSimple(err);
         });
       } else {
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch("/painting/paint/".concat(imgState.imgId), {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.patch("painting/paint/".concat(imgState.imgId), {
           'imgUrl': image
         }).then(function (response) {
           react_toastify__WEBPACK_IMPORTED_MODULE_2__["toast"].success("Corrected", {
@@ -45227,7 +45227,7 @@ var View = function View(_ref) {
     var container = containerRef.current;
     var containerWidth = container.clientWidth;
     var containerHeight = container.clientHeight;
-    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/painting/allPaint").then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("painting/allPaint").then(function (res) {
       var centerWidth = containerWidth;
       var centerHeight = Math.floor(centerWidth / 2);
       var centerStart = Math.floor(containerWidth / 3);

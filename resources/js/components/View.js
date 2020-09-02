@@ -72,6 +72,7 @@ export const View = ({setImgState, imgState}) =>
         })
         .catch(err => {
             toast.error("Server error", {position: toast.POSITION.TOP_CENTER, autoClose: 2000})
+            
         })
 
     }
@@ -81,7 +82,7 @@ export const View = ({setImgState, imgState}) =>
         const container = containerRef.current
         const containerWidth = container.clientWidth
         const containerHeight = container.clientHeight
-        axios.get("/painting/allPaint")
+        axios.get("painting/allPaint")
         .then( res => 
             {
                 const centerWidth = containerWidth
@@ -147,6 +148,7 @@ export const View = ({setImgState, imgState}) =>
                     ...rest,
                 })
             }
+            
         } )
     }, [imgState.imgSize])
 

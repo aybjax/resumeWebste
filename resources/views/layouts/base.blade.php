@@ -18,6 +18,10 @@
                 min-height: 100vh;
             }
 
+            .content-container {
+                position: relative;
+            }
+
             .footer {
                 position: absolute;
                 background-color: rgb(8, 75, 104);
@@ -27,6 +31,7 @@
                 bottom:0;
                 right:0;
                 left:0;
+                z-index: -100;
             }
         </style>
 
@@ -40,6 +45,7 @@
     </head>
     <body>
 <div class="page-container">
+<div class="content-container">
     <ul class="navbar-list">
         <li>
             @if( strtok(Route::currentRouteName(), ".") === "notebooks" )
@@ -94,7 +100,7 @@
     </ul>
         
     @yield("base.content")
-
+</div>
     <div class="footer">
         &copy; Develop with aybjax
     </div>

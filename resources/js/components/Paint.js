@@ -99,7 +99,7 @@ export const Paint = ( {setImgState, imgState} ) =>
     {
         if(imgState.imgId === null)
         {
-            axios.post("/painting", {'imgUrl':image}).then( response =>{
+            axios.post("painting", {'imgUrl':image}).then( response =>{
                 toast.success("Saved", {autoClose: 1000})
                 if(Math.random() * 10 < 2)
                 {
@@ -113,10 +113,11 @@ export const Paint = ( {setImgState, imgState} ) =>
                     })
             } ).catch( err => {
                 errorServerSimple(err)
+                
             } )
         }else
         {
-            axios.patch(`/painting/paint/${imgState.imgId}`, {'imgUrl':image})
+            axios.patch(`painting/paint/${imgState.imgId}`, {'imgUrl':image})
             .then( response =>
             {
                 toast.success("Corrected", {autoClose: 1000})
@@ -136,6 +137,7 @@ export const Paint = ( {setImgState, imgState} ) =>
             } )
             .catch( err => {
                     errorServerSimple(err)
+                    
             } )
         }
     }
