@@ -1,9 +1,7 @@
 @use "resources/mixins";
 @use "resources/variables";
 
-
 body {
-    height: 100%;
     background: variables.$cyan-bg url('../../public/images/paint-bg.jpg') no-repeat center center fixed;
     background-size: cover;
 }
@@ -127,7 +125,7 @@ img {
 .galery-wrapper, .canvas-container {
     margin: {
         top: 100px;
-        bottom: 150px;
+        bottom: 75px;
         left: auto;
         right: auto;
     }

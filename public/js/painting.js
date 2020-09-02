@@ -45401,9 +45401,7 @@ var View = function View(_ref) {
       width: "".concat(centerWidth, "px"),
       height: "".concat(centerHeight, "px")
     },
-    id: imgId && {
-      imgId: imgId
-    } || "null",
+    id: "null",
     src: "https://via.placeholder.com/".concat(centerWidth, "x").concat(centerHeight)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {

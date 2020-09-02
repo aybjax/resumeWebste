@@ -181,6 +181,8 @@ body {
           animation-iteration-count: infinite;
   -webkit-animation-fill-mode: backwards;
           animation-fill-mode: backwards;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -421,6 +423,10 @@ table tr td {
   right: 460px;
 }
 
+.content-wrapper:last-of-type {
+  margin-bottom: 75px;
+}
+
 .flex-wrapper:hover .content-wrapper .content {
   transition: all 1s ease-in;
   opacity: 0.5;
@@ -456,12 +462,41 @@ table tr td {
   display: none;
 }
 
-a {
+a:not(.navbar-a) {
   text-decoration: none;
   color: inherit;
 }
 
-a:hover {
+a:not(.navbar-a)::hover {
   font-size: larger;
+}
+
+.tooltip {
+  position: relative;
+  display: inline;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  display: inline;
+  background-color: #fff;
+  color: black;
+  font-weight: 100;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 0;
+  left: -100%;
+  top: -50%;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+.just-hover:hover {
+  cursor: pointer;
 }
 

@@ -5,6 +5,7 @@ ul.navbar-list {
     display: flex;
     align-items: baseline;
     padding:0;
+    margin-top: 0;
     
     &:hover li:not(.right-float-navbar) a.active-navbar {
         background-color: $navbar-color;
@@ -42,7 +43,7 @@ ul.navbar-list {
             text-shadow: 1px 1px 5px black;
             border-bottom-color: black;
             box-shadow: 1px 1px 5px black;
-            top: 2px;
+            // top: 2px;
             transition: all 0.25s ease;
         }
     }

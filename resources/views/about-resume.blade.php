@@ -21,9 +21,9 @@
             <p>programming enthusiast</p>
         </div>
         <div class="flex-group">
-            <i class="ion-social-github"></i>
-            <i class="ion-ios-email"></i>
-            <i class="ion-social-linkedin"></i>
+            <a target="_blank" href="https://github.com/aybjax"><i class="ion-social-github"></i></a>
+            <a target="_blank" class="tooltip" href="mailto:aybat93@gmail.com"><i class="ion-ios-email"><div class="tooltip-text">aybat93@gmail.com</div></i></a>
+            <a target="_blank" href="https://www.linkedin.com/in/aybjax"><i class="ion-social-linkedin"></i></a>
         </div>
     </div>
 </div>
@@ -98,7 +98,7 @@
     <div class="flex-wrapper">
 
         <div class="content-wrapper">
-        <a href="#">
+        <a target="_blank" href="{{route('painting')}}">
             <div class="content">
                 <h2>Веб приложение Reactjs, html/php, scss</h2>
                 <p>
@@ -119,7 +119,7 @@
         </a>
         </div>
         <div class="content-wrapper">
-        <a href="#">
+        <a target="_blank" href="{{route('notebooks.index')}}">
             <div class="content">
                 <h2>Веб приложение на php Laravel, Eloquent, scss</h2>
                 <p>
@@ -135,7 +135,7 @@
         </a>
         </div>
         <div class="content-wrapper">
-        <a href="#">
+        <a target="_blank" href="http://aybat.host20.uk/webSites/notes/">
             <div class="content">
                 <h2>Веб приложение на php, jQuery, ajax, Bootstrap</h2>
                 <p>
@@ -153,29 +153,29 @@
         </a>
         </div>
         <div class="content-wrapper">
-        <a href="#">
+        <a target="_blank" href="#">
             <div class="content">
                 <h2>Другие проекты</h2>
                     <h4>
-                        <a href="https://file-explorer-aybjax.herokuapp.com/">
+                        <a target="_blank" href="https://file-explorer-aybjax.herokuapp.com/">
                             Файловый браузер
                         </a>
                     </h4>
 
                     <h4>
-                        <a href="#">
+                        <a target="_blank" href="http://aybat.host20.uk/webSites/fruitJQ/">
                             Fruit ninja 
                         </a>
                     </h4>
 
                     <h4>
-                        <a href="#">
+                        <a target="_blank" href="http://aybat.host20.uk/webSites/stopwatch/">
                             Секундомер
                         </a>
                     </h4>
 
                     <h4>
-                        <a href="#">
+                        <a target="_blank" href="http://aybat.host20.uk/webSites/mathJS/">
                             Math Game
                         </a>
                     </h4>
@@ -183,7 +183,7 @@
         </a>
         </div>
         <div class="content-wrapper">
-        <a href="#">
+        <a class="just-hover">
             <div class="content">
                 <h2> Дипломный проект на Python </h2>
                 <p>

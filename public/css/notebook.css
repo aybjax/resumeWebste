@@ -173,7 +173,6 @@
 */
 
 body {
-  min-height: 100%;
   background: #FAEBD7 url(/images/notebook.jpg?a72264f4eeb1b74f17c77a18b73f0c97) center center;
   background-size: cover;
 }
