@@ -212,8 +212,6 @@ a:not(.navbar-a) {
         {
             transition: all 1s ease-in;
             opacity: 0.5;
-            overflow-x: visible;
-            
         }
     
         &:hover .content
@@ -290,4 +288,33 @@ a:not(.navbar-a) {
 
  .inline-block {
     display: inline-block;    
+}
+
+@media(max-width: 511px) {
+    .body {
+        font:{
+            size: small;
+        }
+    }
+    .container {
+        padding: 0;
+    }
+
+    .flex-wrapper {
+        justify-content: center;
+        width: 90%;
+        padding: 0;
+        .content-wrapper {
+            justify-content: center;
+            width: 100%;
+            padding: 0;
+            
+            .content {
+                justify-content: center;
+                min-width: 0px;
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
 }

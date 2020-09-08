@@ -11,9 +11,4 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.react('resources/js/painting.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/notebook.scss', 'public/css')
-    .sass('resources/sass/parts/navbar.scss', 'public/css')
-    .sass('resources/sass/about-resume.scss', 'public/css')
-    .sass('resources/sass/painting.scss', 'public/css');
+mix.react('resources/js/painting', 'public/js');

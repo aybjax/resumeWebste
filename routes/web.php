@@ -1,5 +1,6 @@
 <?php
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,9 +44,31 @@ Route::delete("notebooks/delete","NotebookController@delete")->name('notebooks.d
 //PAINTING REACTJS
 Route::get("painting", 'PaintsController@index')->name("painting");
 
-//PAINTING API
-Route::post("painting", "PaintsController@put");
+//PAINTING Routes
+Route::post("painting/save", "PaintsController@put");
 Route::get("painting/allPaint", "PaintsController@request");
 Route::get("painting/paint", "PaintsController@getImg");
-Route::delete("painting/paint/{id}", "PaintsController@deleteImg");
-Route::patch("painting/paint/{id}", "PaintsController@patchImg");
+Route::delete("painting/delete/{id}", "PaintsController@deleteImg");
+Route::patch("painting/patch/{id}", "PaintsController@patchImg");
+
+Route::get('redirect/{url}', function($url){
+    return redirect('http://aybat.host20.uk/webSites/'.$url);
+});
+
+Route::get('visit/heroku', function(){
+    return redirect('https://file-explorer-aybjax.herokuapp.com/');
+});
+
+Route::get('visit/qwant', function(){
+    return redirect('https://github.com/aybjax/qwant_kz');
+});
+
+Route::get('visit/github', function(){
+    return redirect('https://github.com/aybjax/');
+});
+
+
+
+Route::fallback(function(){
+    return redirect()->route('aboutme');
+});

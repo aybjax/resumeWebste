@@ -107,4 +107,7 @@
 </div>
     </body>
     @yield("base.script-address")
+    <!-- <script>
+        fetch("somebodyIn/{{Route::currentRouteName()}}");
+    </script> -->
 </html>

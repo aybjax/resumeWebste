@@ -349,16 +349,6 @@ table tr td {
   }
 }
 
-@media (max-width: 511px) {
-  .sticky-top {
-    position: relative;
-  }
-
-  .flex-group {
-    margin-bottom: 25px;
-  }
-}
-
 /*
 ** small projects part
 */
@@ -524,6 +514,7 @@ a:not(.navbar-a)::hover {
   .flex-wrapper:hover .content-wrapper .content {
     transition: all 1s ease-in;
     opacity: 0.5;
+    overflow-x: visible;
   }
 
   .flex-wrapper:hover .content-wrapper:hover .content {
@@ -577,34 +568,5 @@ a:not(.navbar-a)::hover {
 
 .inline-block {
   display: inline-block;
-}
-
-@media (max-width: 511px) {
-  .body {
-    font-size: small;
-  }
-
-  .container {
-    padding: 0;
-  }
-
-  .flex-wrapper {
-    justify-content: center;
-    width: 90%;
-    padding: 0;
-  }
-
-  .flex-wrapper .content-wrapper {
-    justify-content: center;
-    width: 100%;
-    padding: 0;
-  }
-
-  .flex-wrapper .content-wrapper .content {
-    justify-content: center;
-    min-width: 0px;
-    width: 100%;
-    height: auto;
-  }
 }
 

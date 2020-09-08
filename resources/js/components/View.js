@@ -52,7 +52,7 @@ export const View = ({setImgState, imgState}) =>
 
     const deleteImg = () =>{
         const {imgId, ...rest} = imgState
-        axios.delete(`painting/paint/${imgId}`)
+        axios.delete(`painting/delete/${imgId}`)
         .then(res => {
             toast.success("Deleted", {autoClose: 1000})
             if(Math.random() * 10 < 2)

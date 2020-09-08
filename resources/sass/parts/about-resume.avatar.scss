@@ -100,14 +100,7 @@ i[class ^= "ion-"]
 
     margin: 0;
 
-    /*
-    img
-    {
-        height: 100%;
-        overflow: hidden;
-    }
-    */
-    content:url("../../../public/images/Aibat_Zhakeyev.jpg");
+    content:url("/images/Aibat_Zhakeyev.jpg");
     background-attachment: fixed;
     background-size: cover;
     
@@ -196,6 +189,19 @@ table tr td
             .img-container {
                 display: none;
             }
+        }
+    }
+}
+
+
+@media(max-width: 511px) {
+    .sticky-top {
+        position: relative;
+    }
+
+    .flex-group {
+        margin: {
+            bottom: 25px;
         }
     }
 }

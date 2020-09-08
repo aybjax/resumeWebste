@@ -27,11 +27,10 @@
         </div>
     </div>
 </div>
-
 <div class="container sticky-top container-bg">
     <div class="grid-sides">
         <div class="img-container">
-            <img src="media/Aibat_Zhakeyev.jpg" alt="my-photo" />
+            <!-- <img src="./media/Aibat_Zhakeyev.jpg" alt="my-photo" /> -->
         </div>
         <table class="grid-table">
             <tr>
@@ -79,7 +78,7 @@
                         <div class="progress">75</div>
                     </div>
                 </td>
-                <td>HTML, CSS, BS
+                <td>HTML, CSS, Bootstrap
                     <div class="empty-bar">
                         <div class="progress">85</div>
                     </div>
@@ -101,6 +100,7 @@
             <a target="_blank" href="{{route('painting')}}">
                 <div class="content">
                     <h2>Веб приложение Reactjs, html/php, scss</h2>
+                    <h4>Нажите для перехода на приложение</h4>
                     <p>
                         Приложение для рисования. Можно сохранять на базе данных MySQL через Laravel в качестве backend приложения. 
                         для этого спользуется библиотека axios для GET, PUT, PATCH, DELETE методов HTTP, без использования Cross-origin resource sharing.
@@ -122,6 +122,7 @@
             <a target="_blank" href="{{route('notebooks.index')}}">
                 <div class="content">
                     <h2>Веб приложение на php Laravel, Eloquent, scss</h2>
+                    <h4>Нажите для перехода на приложение</h4>
                     <p>
                         Приложение для записи. Можно сохранять на базе данных при помоци Eloquent.
                     </p>
@@ -135,9 +136,10 @@
             </a>
         </div>
         <div class="content-wrapper">
-            <a target="_blank" href="http://aybat.host20.uk/webSites/notes/">
+            <a target="_blank" href="redirect/notes/">
                 <div class="content">
                     <h2>Веб приложение на php, jQuery, ajax, Bootstrap</h2>
+                    <h4>Нажите для перехода на приложение</h4>
                     <p>
                         Приложение для записи. Можно сохранять на базе данных при помоци mysqli. 
                         Приложение написано на процедурном php. При регистрации отправляется э-письмо для активизации. 
@@ -156,8 +158,9 @@
             <a target="_blank" href="#">
                 <div class="content">
                     <h2>Другие проекты</h2>
+                    <h4>Нажите на названия для перехода на приложение</h4>
                     <h4>
-                        <a target="_blank" href="https://file-explorer-aybjax.herokuapp.com/">
+                        <a target="_blank" href="visit/heroku">
                             Файловый браузер
                         </a>
                     </h4>
@@ -165,7 +168,7 @@
                         Приложение На Nodejs в сервере Heroku
                     </p>
                     <h4>
-                        <a target="_blank" href="https://github.com/aybjax/qwant_kz">
+                        <a target="_blank" href="visit/qwant">
                             Программы на С 
                         </a>
                     </h4>
@@ -173,25 +176,24 @@
                         Проекты выполненные на программе QwantKz в содействии Qwasar
                     </p>
                     <h4>
-                        <a target="_blank" href="https://github.com/aybjax/">
-                            Программы на Golang и Java и т.д.
+                        <a target="_blank" href="visit/github">
+                            Программы на Golang, Shell и Java и т.д.
                         </a>
                     </h4>
-                    <p>
-                        Маленкие программы по биоинформатике и простые программы сделанные во время изучения в платформах Udemy и Coursera
-                    </p>
+                        Маленкие программы по биоинформатике
+
                     <h4 class="inline-block">
-                        <a target="_blank" href="http://aybat.host20.uk/webSites/fruitJQ/">
-                            Fruit ninja 
+                        <a target="_blank" href="redirect/fruitJQ/">
+                            Fruit ninja
                         </a>
                     </h4>
                     <h4 class="inline-block">
-                        <a target="_blank" href="http://aybat.host20.uk/webSites/stopwatch/">
+                        <a target="_blank" href="redirect/stopwatch/">
                             Секундомер
                         </a>
                     </h4>
                     <h4 class="inline-block">
-                        <a target="_blank" href="http://aybat.host20.uk/webSites/mathJS/">
+                        <a target="_blank" href="redirect/mathJS/">
                             Math Game
                         </a>
                     </h4>
@@ -234,6 +236,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(function(){
+    var bounce;
     $(".progress").each(function(index, value){
         var progress = parseInt(value.innerHTML);
         $(this).text("");
