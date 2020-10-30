@@ -45,26 +45,28 @@ Route::delete("notebooks/delete","NotebookController@delete")->name('notebooks.d
 Route::get("painting", 'PaintsController@index')->name("painting");
 
 //PAINTING Routes
-Route::post("painting/save", "PaintsController@put");
+Route::post("painting", "PaintsController@put");
 Route::get("painting/allPaint", "PaintsController@request");
-Route::get("painting/paint", "PaintsController@getImg");
-Route::delete("painting/delete/{id}", "PaintsController@deleteImg");
-Route::patch("painting/patch/{id}", "PaintsController@patchImg");
+Route::delete("painting/{id}", "PaintsController@deleteImg");
+Route::patch("painting", "PaintsController@patchImg");
+
+
+
 
 Route::get('redirect/{url}', function($url){
     return redirect('http://aybat.host20.uk/webSites/'.$url);
 });
 
-Route::get('visit/heroku', function(){
-    return redirect('https://file-explorer-aybjax.herokuapp.com/');
-});
-
-Route::get('visit/qwant', function(){
-    return redirect('https://github.com/aybjax/qwant_kz');
+Route::get('visit/heroku/{url}', function($url){
+    return redirect('https://'.$url.'.herokuapp.com/');
 });
 
 Route::get('visit/github', function(){
     return redirect('https://github.com/aybjax/');
+});
+
+Route::get('visit/github/{url}', function($url){
+    return redirect('https://github.com/aybjax/'.$url);
 });
 
 
